@@ -102,7 +102,7 @@ const SearchPage = () => {
                 inStock: filters.inStock ? 'true' : undefined,
                 sort: filters.sort,
                 page,
-                limit: 12,
+                limit: 10,
             };
 
             const res = await getKeyboardsApi(params);

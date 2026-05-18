@@ -81,7 +81,7 @@ const getKeyboardsService = async (query = {}) => {
 
     // Always return a paginated response object so clients can rely on pagination metadata
     const pageNum = Math.max(1, Number(page) || 1);
-    const pageSize = Math.max(1, Number(limit) || 12);
+    const pageSize = Math.max(1, Number(limit) || 10);
 
     const total = await Keyboard.countDocuments(filter);
     const totalPages = Math.max(1, Math.ceil(total / pageSize));
