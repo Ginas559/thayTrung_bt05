@@ -1,4 +1,4 @@
-Link deloy trên vercel: https://thay-trung-bt04.vercel.app/
+Link deloy trên vercel: https://thay-trung-bt05-f2pi.vercel.app/
 tài khoản user: tự đăng ký có gửi otp
 tài khoản admin: admindoaibiet@gmail.com
             pass: 123456
