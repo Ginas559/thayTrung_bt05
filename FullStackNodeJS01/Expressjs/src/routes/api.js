@@ -10,6 +10,7 @@ const {
     createCategory,
     updateCategory,
     deleteCategory,
+    incrementViewCount,
 } = require('../controllers/keyboardController');
 const {
     getArticles,
@@ -52,6 +53,7 @@ routerAPI.get("/account", delay, getAccount);
 routerAPI.get("/categories", getCategories);
 routerAPI.get("/keyboards", getKeyboards);
 routerAPI.get("/keyboards/:id", getKeyboardDetail);
+routerAPI.post('/keyboards/:id/view', incrementViewCount);
 routerAPI.get("/books", getKeyboards);
 routerAPI.get("/books/:id", getKeyboardDetail);
 routerAPI.get("/articles", getArticles);

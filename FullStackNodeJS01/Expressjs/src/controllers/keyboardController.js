@@ -16,6 +16,13 @@ const getKeyboards = async (req, res) => {
     return res.status(200).json(data);
 };
 
+const incrementViewCount = async (req, res) => {
+    const id = req.params.id;
+    const data = await Keyboard.findByIdAndUpdate(id, { $inc: { viewCount: 1 } }, { new: true });
+    if (!data) return res.status(404).json({ message: 'Keyboard not found' });
+    return res.status(200).json(data);
+};
+
 const getKeyboardDetail = async (req, res) => {
     const data = await getKeyboardDetailService(req.params.id);
     if (!data) {
@@ -64,4 +71,5 @@ module.exports = {
     createCategory,
     updateCategory,
     deleteCategory,
+    incrementViewCount,
 };

@@ -68,6 +68,8 @@ const getKeyboardDetailApi = (id) => {
     return axios.get(URL_API);
 };
 
+const incrementViewCountApi = (id) => axios.post(`/v1/api/keyboards/${id}/view`);
+
 const getArticlesApi = (params = {}) => {
     const URL_API = '/v1/api/articles';
     return axios.get(URL_API, { params });

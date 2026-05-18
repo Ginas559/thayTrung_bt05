@@ -1,4 +1,4 @@
-import { useContext, useEffect, useState } from 'react';
+import { useContext, useEffect, useState, useRef } from 'react';
 import { Link } from 'react-router-dom';
 import { AuthContext } from '../components/context/auth.context';
 import { getArticlesApi, getKeyboardsApi } from '../util/api';
@@ -8,6 +8,7 @@ const sectionConfig = [
     { key: 'promotion', title: 'Bàn Phím Khuyến Mãi', subtitle: 'Giá tốt nhất trong năm' },
     { key: 'latest', title: 'Bàn Phím Mới Nhất', subtitle: 'Vừa về kho, cập nhật liên tục' },
     { key: 'bestseller', title: 'Bán Chạy Nhất', subtitle: 'Được nhiều thành viên lựa chọn' },
+    { key: 'most-viewed', title: 'Xem Nhiều Nhất', subtitle: 'Những sản phẩm được quan tâm nhiều' },
 ];
 
 const HomePage = () => {
@@ -16,28 +17,121 @@ const HomePage = () => {
         promotion: [],
         latest: [],
         bestseller: [],
+        'most-viewed': [],
+    });
+    const [pages, setPages] = useState({
+        bestseller: 1,
+        'most-viewed': 1,
+    });
+    const [totalPages, setTotalPages] = useState({
+        bestseller: 1,
+        'most-viewed': 1,
+    });
+    const [animating, setAnimating] = useState({
+        bestseller: false,
+        'most-viewed': false,
     });
     const [news, setNews] = useState([]);
+    const bestsellerRef = useRef(null);
+    const mostViewedRef = useRef(null);
+    const carouselBestsellerRef = useRef(null);
+    const carouselMostViewedRef = useRef(null);
 
     useEffect(() => {
         const fetchSections = async () => {
-            const [promotion, latest, bestseller, articles] = await Promise.all([
+            const [promotion, latest, articles] = await Promise.all([
                 getKeyboardsApi({ promotion: true, sort: 'popular' }),
                 getKeyboardsApi({ latest: true, sort: 'latest' }),
-                getKeyboardsApi({ bestseller: true, sort: 'popular' }),
                 getArticlesApi({ latest: true }),
             ]);
 
-            setSections({
-                promotion: promotion || [],
-                latest: latest || [],
-                bestseller: bestseller || [],
-            });
+            setSections((prev) => ({
+                ...prev,
+                promotion: Array.isArray(promotion) ? promotion : (promotion?.items || []),
+                latest: Array.isArray(latest) ? latest : (latest?.items || []),
+            }));
             setNews(Array.isArray(articles) ? articles : []);
         };
 
         fetchSections();
     }, []);
+
+    // Fetch paginated data for bestseller and most-viewed when page changes
+    useEffect(() => {
+        const fetchBestsellerPage = async () => {
+            const page = pages.bestseller || 1;
+            // Fetch top-sold keyboards with pageSize = 10 to match requirement
+            const res = await getKeyboardsApi({ sort: 'popular', page, limit: 10 });
+            if (Array.isArray(res)) {
+                setSections((prev) => ({ ...prev, bestseller: res }));
+                setTotalPages((t) => ({ ...t, bestseller: 1 }));
+            } else if (res && res.items) {
+                setSections((prev) => ({ ...prev, bestseller: res.items || [] }));
+                setTotalPages((t) => ({ ...t, bestseller: res.totalPages || 1 }));
+            }
+        };
+
+        const fetchMostViewedPage = async () => {
+            const page = pages['most-viewed'] || 1;
+            const res = await getKeyboardsApi({ sort: 'views', page, limit: 10 });
+            if (Array.isArray(res)) {
+                setSections((prev) => ({ ...prev, 'most-viewed': res }));
+                setTotalPages((t) => ({ ...t, 'most-viewed': 1 }));
+            } else if (res && res.items) {
+                setSections((prev) => ({ ...prev, 'most-viewed': res.items || [] }));
+                setTotalPages((t) => ({ ...t, 'most-viewed': res.totalPages || 1 }));
+            }
+        };
+
+        fetchBestsellerPage();
+        fetchMostViewedPage();
+    }, [pages.bestseller, pages['most-viewed']]);
+
+    const scrollThenSetPage = (key, nextPage, container) => {
+        if (!container) {
+            setPages((p) => ({ ...p, [key]: nextPage }));
+            return;
+        }
+
+        const pageWidth = container.clientWidth || 0;
+        const start = container.scrollLeft || 0;
+        const target = Math.max(0, Math.min(container.scrollWidth - pageWidth, start + (nextPage > pages[key] ? pageWidth : -pageWidth)));
+
+        // animate scroll
+        try {
+            container.scrollTo({ left: target, behavior: 'smooth' });
+        } catch {
+            // fallback: set directly
+            container.scrollLeft = target;
+        }
+
+        setAnimating((a) => ({ ...a, [key]: true }));
+
+        // after animation, update page and reset scroll to 0 to display new page items
+        setTimeout(() => {
+            setPages((p) => ({ ...p, [key]: nextPage }));
+            setAnimating((a) => ({ ...a, [key]: false }));
+            // reset scroll so new items appear at start
+            container.scrollTo?.({ left: 0, behavior: 'smooth' });
+        }, 420);
+    };
+
+    const gotoPrev = (key) => {
+        const current = pages[key] || 1;
+        if (current <= 1) return;
+        const next = Math.max(1, current - 1);
+        const container = key === 'bestseller' ? carouselBestsellerRef.current : carouselMostViewedRef.current;
+        scrollThenSetPage(key, next, container);
+    };
+
+    const gotoNext = (key) => {
+        const current = pages[key] || 1;
+        const max = totalPages[key] || 1;
+        if (current >= max) return;
+        const next = Math.min(max, current + 1);
+        const container = key === 'bestseller' ? carouselBestsellerRef.current : carouselMostViewedRef.current;
+        scrollThenSetPage(key, next, container);
+    };
 
     return (
         <div className="mx-auto max-w-7xl px-4 py-6 lg:px-6">
@@ -50,8 +144,10 @@ const HomePage = () => {
                             ? `Xin chào ${auth?.user?.name || auth?.user?.email}. Hôm nay có khuyến mãi, bàn phím mới nhất và bestseller dành riêng cho bạn.`
                             : 'Giảm giá đến 50%, cập nhật bàn phím mới và bestseller mỗi ngày. Đăng nhập để xem thông tin thành viên và tiếp tục mua sắm.'}
                     </p>
-                    <div className="mt-8 flex flex-wrap gap-3">
+                    <div className="mt-8 flex flex-wrap gap-3 items-center">
                         <Link to="/search" className="inline-flex items-center justify-center rounded-2xl bg-white px-5 py-3 text-sm font-semibold text-red-700 shadow-lg shadow-red-900/10 transition hover:scale-[1.01]">{auth.isAuthenticated ? 'Danh sách bàn phím' : 'Khám phá ngay'}</Link>
+                        <button onClick={() => bestsellerRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })} className="inline-flex items-center justify-center rounded-md bg-white/90 px-3 py-2 text-xs font-medium text-slate-700 shadow-sm hover:bg-white">Bán chạy</button>
+                        <button onClick={() => mostViewedRef.current?.scrollIntoView({ behavior: 'smooth', block: 'start' })} className="inline-flex items-center justify-center rounded-md bg-white/90 px-3 py-2 text-xs font-medium text-slate-700 shadow-sm hover:bg-white">Xem nhiều</button>
                         {auth?.isAuthenticated ? (
                             auth?.user?.role === 'Admin' ? (
                                 <Link to="/admin" className="inline-flex items-center justify-center rounded-2xl border border-white/25 bg-white/10 px-5 py-3 text-sm font-semibold text-white transition hover:bg-white/15">Vào trang quản trị</Link>
@@ -81,37 +177,88 @@ const HomePage = () => {
             </section>
 
             {sectionConfig.map((section) => (
-                <section className="mt-10" key={section.key}>
+                <section ref={section.key === 'bestseller' ? bestsellerRef : section.key === 'most-viewed' ? mostViewedRef : undefined} className="mt-10" key={section.key}>
                     <div className="mb-5 flex flex-wrap items-end justify-between gap-3">
-                        <div>
-                            <div className="text-sm font-extrabold tracking-[0.25em] text-red-600">{section.key.toUpperCase()}</div>
-                            <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-900 md:text-3xl">{section.title}</h2>
-                        </div>
-                        <p className="text-sm text-slate-500">{section.subtitle}</p>
-                    </div>
-
-                    <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
-                        {sections[section.key].map((keyboard) => (
-                            <Link key={keyboard._id} to={`/keyboard/${keyboard._id}`} className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60">
-                                <div className="relative aspect-[4/5] overflow-hidden bg-slate-100">
-                                    <img src={keyboard.images?.[0]} alt={keyboard.title} className="h-full w-full object-cover transition duration-300 group-hover:scale-105" />
-                                    {keyboard.discount ? <span className="absolute right-3 top-3 rounded-full bg-rose-500 px-3 py-1 text-xs font-bold text-white">{getDiscountLabel(keyboard.discount)}</span> : null}
-                                </div>
-                                <div className="p-4">
-                                    <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">{keyboard.categoryId?.name || ''}</div>
-                                    <h3 className="mt-2 text-lg font-bold text-slate-900">{keyboard.title}</h3>
-                                    <p className="mt-1 text-sm text-slate-500">{keyboard.author}</p>
-                                    <div className="mt-2 text-sm font-semibold text-amber-500">{keyboard.rating?.toFixed(1)} / 5.0</div>
-                                    <div className="mt-4 flex items-end justify-between gap-3">
-                                        <div>
-                                            <div className="text-lg font-black text-red-600">{formatCurrency(keyboard.price)}</div>
-                                            <div className="text-sm text-slate-400 line-through">{formatCurrency(keyboard.oldPrice)}</div>
-                                        </div>
+                                    <div>
+                                        <div className="text-sm font-extrabold tracking-[0.25em] text-red-600">{section.key.toUpperCase()}</div>
+                                        <h2 className="mt-2 text-2xl font-black tracking-tight text-slate-900 md:text-3xl">{section.title}</h2>
+                                    </div>
+                                    <div className="flex items-center gap-3">
+                                        <p className="text-sm text-slate-500">{section.subtitle}</p>
+                                        {['bestseller', 'most-viewed'].includes(section.key) ? (
+                                            <div className="ml-4 inline-flex items-center gap-2 rounded-xl bg-white/95 px-3 py-1 text-sm font-medium shadow-sm">
+                                                <button onClick={() => gotoPrev(section.key)} disabled={(pages[section.key] || 1) <= 1} aria-label="Prev page" className="rounded-full bg-slate-50 p-1 shadow-sm disabled:opacity-40">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                                                    </svg>
+                                                </button>
+                                                <div className="px-2 text-slate-700">Trang {pages[section.key] || 1}/{totalPages[section.key] || 1}</div>
+                                                <button onClick={() => gotoNext(section.key)} disabled={(pages[section.key] || 1) >= (totalPages[section.key] || 1)} aria-label="Next page" className="rounded-full bg-slate-50 p-1 shadow-sm disabled:opacity-40">
+                                                    <svg xmlns="http://www.w3.org/2000/svg" className="h-4 w-4 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                                        <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                                    </svg>
+                                                </button>
+                                            </div>
+                                        ) : null}
                                     </div>
                                 </div>
-                            </Link>
-                        ))}
-                    </div>
+
+                            {/* For bestseller and most-viewed sections we render a horizontal scroll list */}
+                            {['bestseller', 'most-viewed'].includes(section.key) ? (
+                                <div className="relative group">
+                                    <div ref={section.key === 'bestseller' ? carouselBestsellerRef : section.key === 'most-viewed' ? carouselMostViewedRef : undefined} className={`flex gap-4 overflow-x-auto snap-x snap-mandatory scroll-smooth py-2 transform transition-all duration-500 ease-in-out ${animating[section.key] ? 'opacity-0 translate-y-4' : 'opacity-100 translate-y-0'}`}>
+                                        {sections[section.key].map((keyboard) => (
+                                            <Link key={keyboard._id} to={`/keyboard/${keyboard._id}`} className="w-[220px] snap-start flex-shrink-0 group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60">
+                                                <div className="relative aspect-[4/5] overflow-hidden bg-slate-100">
+                                                    <img src={keyboard.images?.[0]} alt={keyboard.title} className="h-full w-full object-cover transition duration-300 group-hover:scale-105" />
+                                                </div>
+                                                <div className="p-3">
+                                                    <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">{keyboard.categoryId?.name || ''}</div>
+                                                    <h3 className="mt-2 text-sm font-bold text-slate-900 line-clamp-2">{keyboard.title}</h3>
+                                                    <div className="mt-2 text-sm font-semibold text-amber-500">{keyboard.rating?.toFixed(1)} / 5.0</div>
+                                                    <div className="mt-3 text-lg font-black text-red-600">{formatCurrency(keyboard.price)}</div>
+                                                </div>
+                                            </Link>
+                                        ))}
+                                    </div>
+
+                                    {/* Overlay arrows (hover) */}
+                                    <button onClick={() => gotoPrev(section.key)} disabled={(pages[section.key] || 1) <= 1} aria-label="Previous" className="absolute left-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2 shadow-md disabled:opacity-40 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M15 19l-7-7 7-7" />
+                                        </svg>
+                                    </button>
+                                    <button onClick={() => gotoNext(section.key)} disabled={(pages[section.key] || 1) >= (totalPages[section.key] || 1)} aria-label="Next" className="absolute right-2 top-1/2 z-10 -translate-y-1/2 rounded-full bg-white/90 p-2 shadow-md disabled:opacity-40 opacity-0 group-hover:opacity-100 pointer-events-none group-hover:pointer-events-auto transition-opacity duration-200">
+                                        <svg xmlns="http://www.w3.org/2000/svg" className="h-5 w-5 text-slate-700" viewBox="0 0 24 24" fill="none" stroke="currentColor">
+                                            <path strokeLinecap="round" strokeLinejoin="round" strokeWidth="2" d="M9 5l7 7-7 7" />
+                                        </svg>
+                                    </button>
+
+                                    
+                                </div>
+                            ) : (
+                                <div className="grid gap-5 sm:grid-cols-2 xl:grid-cols-4">
+                                    {sections[section.key].map((keyboard) => (
+                                        <Link key={keyboard._id} to={`/keyboard/${keyboard._id}`} className="group overflow-hidden rounded-3xl border border-slate-200 bg-white shadow-sm transition hover:-translate-y-1 hover:shadow-xl hover:shadow-slate-200/60">
+                                            <div className="relative aspect-[4/5] overflow-hidden bg-slate-100">
+                                                <img src={keyboard.images?.[0]} alt={keyboard.title} className="h-full w-full object-cover transition duration-300 group-hover:scale-105" />
+                                            </div>
+                                            <div className="p-4">
+                                                <div className="text-xs font-semibold uppercase tracking-wide text-slate-400">{keyboard.categoryId?.name || ''}</div>
+                                                <h3 className="mt-2 text-lg font-bold text-slate-900">{keyboard.title}</h3>
+                                                <p className="mt-1 text-sm text-slate-500">{keyboard.author}</p>
+                                                <div className="mt-2 text-sm font-semibold text-amber-500">{keyboard.rating?.toFixed(1)} / 5.0</div>
+                                                <div className="mt-4 flex items-end justify-between gap-3">
+                                                    <div>
+                                                        <div className="text-lg font-black text-red-600">{formatCurrency(keyboard.price)}</div>
+                                                        <div className="text-sm text-slate-400 line-through">{formatCurrency(keyboard.oldPrice)}</div>
+                                                    </div>
+                                                </div>
+                                            </div>
+                                        </Link>
+                                    ))}
+                                </div>
+                            )}
                 </section>
             ))}
 

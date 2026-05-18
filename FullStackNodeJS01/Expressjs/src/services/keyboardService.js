@@ -70,6 +70,8 @@ const getKeyboardsService = async (query = {}) => {
                 return { price: -1 };
             case 'popular':
                 return { sold: -1 };
+            case 'views':
+                return { viewCount: -1 };
             case 'rating':
                 return { rating: -1 };
             default:
@@ -77,18 +79,12 @@ const getKeyboardsService = async (query = {}) => {
         }
     })();
 
-    // If pagination params are provided, return paginated response suitable for lazy-loading
-    const hasPagination = typeof page !== 'undefined' || typeof limit !== 'undefined';
-
-    if (!hasPagination) {
-        return Keyboard.find(filter).populate('categoryId').sort(sortOption);
-    }
-
+    // Always return a paginated response object so clients can rely on pagination metadata
     const pageNum = Math.max(1, Number(page) || 1);
     const pageSize = Math.max(1, Number(limit) || 12);
 
     const total = await Keyboard.countDocuments(filter);
-    const totalPages = Math.ceil(total / pageSize);
+    const totalPages = Math.max(1, Math.ceil(total / pageSize));
 
     const items = await Keyboard.find(filter)
         .populate('categoryId')

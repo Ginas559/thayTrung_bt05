@@ -31,8 +31,13 @@ const KeyboardDetailPage = () => {
             }
             setLoading(false);
         };
+        // increment view count for analytics
+        const incView = async () => {
+            try { await incrementViewCountApi(id); } catch (e) { /* ignore */ }
+        };
 
         load();
+        incView();
     }, [id]);
 
     const onAddToCart = async () => {

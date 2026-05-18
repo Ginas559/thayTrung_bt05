@@ -67,6 +67,7 @@ const keyboards = baseModels.map((name, idx) => {
         discount: Math.floor(Math.random() * 15) + 5,
         stock: 5 + (idx % 10) * 3,
         sold: 10 + idx * 7,
+        viewCount: 50 + idx * 15,
         rating: +(4 + (Math.random() * 1)).toFixed(1),
         reviewCount: 50 + idx * 20,
         images,
