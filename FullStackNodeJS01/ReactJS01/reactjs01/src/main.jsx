@@ -17,7 +17,7 @@ import NewsDetailPage from './pages/news-detail.jsx';
 import CartPage from './pages/cart.jsx';
 import OrdersPage from './pages/orders.jsx';
 import CheckoutPage from './pages/checkout.jsx';
-import OrderSuccessPage from './pages/order-success.jsx';
+import OrderDetailPage from './pages/order-detail.jsx';
 import AdminOrdersPage from './pages/admin-orders.jsx';
 import { AuthWrapper } from './components/context/auth.wrapper.jsx';
 import { RequireAdmin, RequireAdminOrStaff } from './components/route/guards.jsx';
@@ -69,8 +69,12 @@ const router = createBrowserRouter([
         element: <OrdersPage />,
       },
       {
+        path: "orders/:id",
+        element: <OrderDetailPage />,
+      },
+      {
         path: "orders/success/:id",
-        element: <OrderSuccessPage />,
+        element: <OrderDetailPage />,
       },
     ],
   },

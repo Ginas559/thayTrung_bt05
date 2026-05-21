@@ -5,6 +5,8 @@ const {
     getMyOrders,
     getAllOrders,
     getOrderById,
+    cancelOrder,
+    approveCancelOrder,
     updateOrderStatus,
 } = require('../controllers/order.controller');
 
@@ -24,6 +26,8 @@ router.get('/my-orders', getMyOrders);
 router.get('/me', getMyOrders);
 router.get('/', allowRoles('Admin', 'Moderator'), getAllOrders);
 router.get('/:id', getOrderById);
+router.patch('/:id/cancel', cancelOrder);
 router.patch('/:id/status', allowRoles('Admin', 'Moderator'), updateOrderStatus);
+router.patch('/:id/approve-cancel', allowRoles('Admin'), approveCancelOrder);
 
 module.exports = router;

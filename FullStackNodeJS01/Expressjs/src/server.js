@@ -11,6 +11,7 @@ const User = require('./models/user');
 const bcrypt = require('bcrypt');
 const { seedKeyboardsCollections } = require('./seeders/keyboardSeeder');
 const { seedArticlesCollections } = require('./seeders/articleSeeder');
+const { startOrderAutoConfirmJob } = require('./jobs/orderAutoConfirm.job');
 
 const app = express(); // cấu hình app là express
 
@@ -55,6 +56,8 @@ app.use('/v1/api/', apiRoutes);
 
         await seedKeyboardsCollections();
         await seedArticlesCollections();
+
+        startOrderAutoConfirmJob();
 
         if (!process.env.VERCEL) {
             // lắng nghe port trong env khi chạy local

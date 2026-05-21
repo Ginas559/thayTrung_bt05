@@ -33,6 +33,32 @@ const orderItemSchema = new mongoose.Schema(
     { _id: false },
 );
 
+const statusHistorySchema = new mongoose.Schema(
+    {
+        status: {
+            type: String,
+            enum: ['PENDING', 'CONFIRMED', 'PREPARING', 'PROCESSING', 'SHIPPING', 'DELIVERED', 'CANCEL_REQUESTED', 'CANCELLED'],
+            required: true,
+            trim: true,
+        },
+        updatedBy: {
+            type: mongoose.Schema.Types.ObjectId,
+            ref: 'user',
+            default: null,
+        },
+        updatedAt: {
+            type: Date,
+            default: Date.now,
+        },
+        note: {
+            type: String,
+            default: '',
+            trim: true,
+        },
+    },
+    { _id: false },
+);
+
 const orderSchema = new mongoose.Schema(
     {
         user: {
@@ -63,9 +89,13 @@ const orderSchema = new mongoose.Schema(
         },
         orderStatus: {
             type: String,
-            enum: ['PENDING', 'PROCESSING', 'SHIPPING', 'DELIVERED', 'CANCELLED'],
+            enum: ['PENDING', 'CONFIRMED', 'PREPARING', 'PROCESSING', 'SHIPPING', 'DELIVERED', 'CANCEL_REQUESTED', 'CANCELLED'],
             default: 'PENDING',
             index: true,
+        },
+        statusHistory: {
+            type: [statusHistorySchema],
+            default: [],
         },
         subtotal: {
             type: Number,
@@ -81,6 +111,31 @@ const orderSchema = new mongoose.Schema(
             type: Number,
             required: true,
             min: 0,
+        },
+        confirmedAt: {
+            type: Date,
+            default: null,
+        },
+        preparingAt: {
+            type: Date,
+            default: null,
+        },
+        shippingAt: {
+            type: Date,
+            default: null,
+        },
+        deliveredAt: {
+            type: Date,
+            default: null,
+        },
+        cancelledAt: {
+            type: Date,
+            default: null,
+        },
+        cancelReason: {
+            type: String,
+            default: '',
+            trim: true,
         },
     },
     { timestamps: true },

@@ -88,11 +88,13 @@ const clearCartApi = () => axios.delete('/v1/api/cart');
 const getCheckoutPreviewApi = () => axios.get('/v1/api/orders/checkout/preview');
 const checkoutOrderApi = (payload) => axios.post('/v1/api/orders/checkout', payload);
 const checkoutCartApi = (payload = {}) => axios.post('/v1/api/orders/checkout', payload);
-const getMyOrdersApi = () => axios.get('/v1/api/orders/my-orders');
+const getMyOrdersApi = (params = {}) => axios.get('/v1/api/orders/my-orders', { params });
 const getOrderDetailApi = (id) => axios.get(`/v1/api/orders/${id}`);
+const cancelOrderApi = (id, payload = {}) => axios.patch(`/v1/api/orders/${id}/cancel`, payload);
 
-const getAdminOrdersApi = () => axios.get('/v1/api/orders');
-const updateOrderStatusApi = (id, orderStatus) => axios.patch(`/v1/api/orders/${id}/status`, { orderStatus });
+const getAdminOrdersApi = (params = {}) => axios.get('/v1/api/orders', { params });
+const updateOrderStatusApi = (id, payload = {}) => axios.patch(`/v1/api/orders/${id}/status`, payload);
+const approveCancelOrderApi = (id, payload = {}) => axios.patch(`/v1/api/orders/${id}/approve-cancel`, payload);
 const createKeyboardApi = (data) => axios.post('/v1/api/admin/keyboards', data);
 const updateKeyboardApi = (id, data) => axios.put(`/v1/api/admin/keyboards/${id}`, data);
 const deleteKeyboardApi = (id) => axios.delete(`/v1/api/admin/keyboards/${id}`);
@@ -128,8 +130,10 @@ export {
     checkoutCartApi,
     getMyOrdersApi,
     getOrderDetailApi,
+    cancelOrderApi,
     getAdminOrdersApi,
     updateOrderStatusApi,
+    approveCancelOrderApi,
     createKeyboardApi,
     updateKeyboardApi,
     deleteKeyboardApi,

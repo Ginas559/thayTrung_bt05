@@ -4,6 +4,8 @@ const {
     getMyOrdersService,
     getAllOrdersService,
     getOrderByIdService,
+    cancelOrderService,
+    approveCancelRequestService,
     updateOrderStatusService,
 } = require('../services/order.service');
 
@@ -34,13 +36,13 @@ const checkoutOrder = async (req, res) => {
 };
 
 const getMyOrders = async (req, res) => {
-    const data = await getMyOrdersService(req.user.email);
-    return res.status(200).json(data);
+    const data = await getMyOrdersService(req.user.email, req.query || {});
+    return res.status(data?.EC === 0 ? 200 : 400).json(data);
 };
 
 const getAllOrders = async (req, res) => {
-    const data = await getAllOrdersService();
-    return res.status(200).json(data);
+    const data = await getAllOrdersService(req.query || {});
+    return res.status(data?.EC === 0 ? 200 : 400).json(data);
 };
 
 const getOrderById = async (req, res) => {
@@ -53,8 +55,18 @@ const getOrderById = async (req, res) => {
     return res.status(200).json(payload?.DT);
 };
 
+const cancelOrder = async (req, res) => {
+    const payload = await cancelOrderService(req.user.email, req.params.id, req.body?.cancelReason);
+    return sendMutationResponse(res, payload, 'Hủy đơn hàng thành công');
+};
+
+const approveCancelOrder = async (req, res) => {
+    const payload = await approveCancelRequestService(req.user.email, req.params.id, req.body?.note);
+    return sendMutationResponse(res, payload, 'Đã duyệt hủy đơn thành công');
+};
+
 const updateOrderStatus = async (req, res) => {
-    const payload = await updateOrderStatusService(req.user.email, req.params.id, req.body?.orderStatus);
+    const payload = await updateOrderStatusService(req.user.email, req.params.id, req.body?.orderStatus, req.body?.note);
     return sendMutationResponse(res, payload, 'Cập nhật trạng thái đơn hàng thành công');
 };
 
@@ -64,5 +76,7 @@ module.exports = {
     getMyOrders,
     getAllOrders,
     getOrderById,
+    cancelOrder,
+    approveCancelOrder,
     updateOrderStatus,
 };

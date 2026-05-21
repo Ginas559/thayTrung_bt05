@@ -72,7 +72,7 @@ const CheckoutPage = () => {
                 description: `Đơn hàng ${order?._id || ''} đã được tạo`,
             });
 
-            navigate(`/orders/success/${order?._id}`, { state: { order } });
+            navigate(`/orders/${order?._id}`, { state: { order } });
         } catch (error) {
             notification.error({
                 message: 'Thanh toán',

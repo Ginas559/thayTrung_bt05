@@ -1,61 +1,74 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Button, Card, Collapse, Divider, Empty, Spin, Tag, notification } from 'antd';
+import { Button, Card, Empty, Pagination, Select, Skeleton, Tag, notification } from 'antd';
 import { ArrowLeftOutlined, ClockCircleOutlined, LoadingOutlined, ShoppingOutlined } from '@ant-design/icons';
 import { AuthContext } from '../components/context/auth.context';
 import { getMyOrdersApi } from '../util/api';
 import { formatCurrency } from '../util/format';
 
+const ORDER_STATUS_OPTIONS = ['ALL', 'PENDING', 'CONFIRMED', 'PREPARING', 'SHIPPING', 'DELIVERED', 'CANCEL_REQUESTED', 'CANCELLED'];
+
 const statusColorMap = {
     PENDING: 'gold',
-    PROCESSING: 'blue',
+    CONFIRMED: 'blue',
+    PREPARING: 'processing',
     SHIPPING: 'cyan',
     DELIVERED: 'green',
+    CANCEL_REQUESTED: 'orange',
     CANCELLED: 'red',
 };
+
+const normalizeResponseList = (response) => response?.DT?.items || response?.items || [];
 
 const OrdersPage = () => {
     const navigate = useNavigate();
     const { auth, appLoading } = useContext(AuthContext);
     const [loading, setLoading] = useState(true);
     const [orders, setOrders] = useState([]);
+    const [page, setPage] = useState(1);
+    const [limit] = useState(6);
+    const [total, setTotal] = useState(0);
+    const [status, setStatus] = useState('ALL');
 
     const isAuthenticated = Boolean(auth?.isAuthenticated);
 
-    const loadOrders = async () => {
-        setLoading(true);
-        try {
-            const response = await getMyOrdersApi();
-            setOrders(Array.isArray(response) ? response : []);
-        } catch (error) {
-            setOrders([]);
-            notification.error({
-                message: 'Đơn hàng của tôi',
-                description: error?.message || 'Không thể tải danh sách đơn hàng',
-            });
-        } finally {
-            setLoading(false);
-        }
-    };
-
     useEffect(() => {
-        if (appLoading) {
-            return;
+        const loadOrders = async () => {
+            setLoading(true);
+
+            try {
+                const response = await getMyOrdersApi({ page, limit, status });
+
+                if (response?.EC !== 0) {
+                    throw new Error(response?.EM || 'Không thể tải danh sách đơn hàng');
+                }
+
+                const payload = response?.DT || {};
+                setOrders(normalizeResponseList(response));
+                setTotal(Number(payload?.total || 0));
+            } catch (error) {
+                setOrders([]);
+                setTotal(0);
+                notification.error({
+                    message: 'Đơn hàng của tôi',
+                    description: error?.message || 'Không thể tải danh sách đơn hàng',
+                });
+            } finally {
+                setLoading(false);
+            }
+        };
+
+        if (!appLoading && isAuthenticated) {
+            loadOrders();
         }
+    }, [appLoading, isAuthenticated, page, limit, status]);
 
-        if (!isAuthenticated) {
-            return;
-        }
+    const orderCount = useMemo(() => total, [total]);
 
-        loadOrders();
-    }, [appLoading, isAuthenticated]);
-
-    const orderCount = useMemo(() => orders.length, [orders]);
-
-    if (appLoading || loading) {
+    if (appLoading) {
         return (
-            <div className="mx-auto flex min-h-[60vh] max-w-7xl items-center justify-center px-4 py-10 lg:px-6">
-                <Spin indicator={<LoadingOutlined style={{ fontSize: 28 }} spin />} />
+            <div className="mx-auto max-w-7xl px-4 py-6 lg:px-6">
+                <Skeleton active paragraph={{ rows: 8 }} />
             </div>
         );
     }
@@ -72,16 +85,43 @@ const OrdersPage = () => {
                         Quay lại trang chủ
                     </Button>
                     <h1 className="mt-3 text-3xl font-black tracking-tight text-slate-900">Đơn hàng của tôi</h1>
-                    <p className="mt-2 text-slate-500">Mỗi đơn lưu snapshot sản phẩm nên lịch sử giao dịch vẫn đúng ngay cả khi product realtime thay đổi.</p>
+                    <p className="mt-2 max-w-2xl text-slate-500">Lịch sử mua hàng có phân trang, lọc trạng thái và dữ liệu snapshot để đối chiếu sau này.</p>
                 </div>
 
                 <Tag color="red" icon={<ShoppingOutlined />}>{orderCount} đơn hàng</Tag>
             </div>
 
-            {orders.length ? (
+            <Card className="mb-4 rounded-[28px] border-slate-200 shadow-sm" bodyStyle={{ padding: 20 }}>
+                <div className="flex flex-wrap items-center justify-between gap-3">
+                    <div className="flex flex-wrap items-center gap-3">
+                        <Select
+                            value={status}
+                            onChange={(value) => {
+                                setStatus(value);
+                                setPage(1);
+                            }}
+                            style={{ minWidth: 220 }}
+                            options={ORDER_STATUS_OPTIONS.map((item) => ({ value: item, label: item === 'ALL' ? 'Tất cả trạng thái' : item }))}
+                        />
+                        <Tag color="gold" icon={<ClockCircleOutlined />}>{orderCount} kết quả</Tag>
+                    </div>
+                    <Button onClick={() => navigate('/search')}>Mua thêm</Button>
+                </div>
+            </Card>
+
+            {loading ? (
+                <div className="space-y-4">
+                    {Array.from({ length: 3 }).map((_, index) => (
+                        <Card key={`order-skeleton-${index}`} className="rounded-[28px] border-slate-200 shadow-sm" bodyStyle={{ padding: 20 }}>
+                            <Skeleton active paragraph={{ rows: 4 }} />
+                        </Card>
+                    ))}
+                </div>
+            ) : orders.length ? (
                 <div className="space-y-4">
                     {orders.map((order) => {
                         const items = Array.isArray(order.items) ? order.items : [];
+                        const firstItem = items[0]?.snapshot || {};
 
                         return (
                             <Card key={order._id} className="rounded-[28px] border-slate-200 shadow-sm" bodyStyle={{ padding: 20 }}>
@@ -90,9 +130,9 @@ const OrdersPage = () => {
                                         <div className="text-sm font-semibold uppercase tracking-[0.22em] text-red-600">Đơn hàng</div>
                                         <h2 className="mt-2 text-xl font-bold text-slate-900">#{order._id}</h2>
                                         <div className="mt-2 flex flex-wrap items-center gap-2 text-sm text-slate-500">
-                                            <span>{order.userEmail}</span>
-                                            <span>•</span>
                                             <span>{order.createdAt ? new Date(order.createdAt).toLocaleString('vi-VN') : ''}</span>
+                                            <span>•</span>
+                                            <span>{order.shippingInfo?.fullName || 'Khách hàng'}</span>
                                         </div>
                                     </div>
 
@@ -109,69 +149,29 @@ const OrdersPage = () => {
                                         <div className="mt-2 font-semibold text-slate-900">{order.shippingInfo?.fullName || '---'}</div>
                                     </div>
                                     <div className="rounded-2xl bg-slate-50 p-4">
-                                        <div className="text-xs uppercase tracking-[0.22em] text-slate-400">Số điện thoại</div>
-                                        <div className="mt-2 font-semibold text-slate-900">{order.shippingInfo?.phone || '---'}</div>
+                                        <div className="text-xs uppercase tracking-[0.22em] text-slate-400">Sản phẩm</div>
+                                        <div className="mt-2 font-semibold text-slate-900">{items.length} item</div>
                                     </div>
                                     <div className="rounded-2xl bg-slate-50 p-4">
-                                        <div className="text-xs uppercase tracking-[0.22em] text-slate-400">Phí ship</div>
-                                        <div className="mt-2 font-semibold text-slate-900">{formatCurrency(order.shippingFee || 0)}</div>
+                                        <div className="text-xs uppercase tracking-[0.22em] text-slate-400">Giá trị đơn hàng</div>
+                                        <div className="mt-2 font-semibold text-slate-900">{formatCurrency(order.totalAmount || 0)}</div>
                                     </div>
                                 </div>
 
-                                <Divider className="my-4" />
-
-                                <Collapse
-                                    bordered={false}
-                                    defaultActiveKey={['items']}
-                                    items={[
-                                        {
-                                            key: 'items',
-                                            label: `Chi tiết sản phẩm (${items.length})`,
-                                            children: items.length ? (
-                                                <div className="space-y-3">
-                                                    {items.map((item, index) => {
-                                                        const snapshot = item.snapshot || {};
-                                                        const itemName = snapshot.name || 'Sản phẩm';
-                                                        const itemBrand = snapshot.brand || '';
-                                                        const itemCategory = snapshot.category || '';
-                                                        const itemPrice = Number(snapshot.price || 0);
-                                                        const quantity = Number(item.quantity || 0);
-
-                                                        return (
-                                                            <div key={`${order._id}-${item.product || index}`} className="grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 md:grid-cols-[72px_1fr_auto] md:items-center">
-                                                                <div className="h-18 w-18 overflow-hidden rounded-2xl bg-white">
-                                                                    <img
-                                                                        src={snapshot.image || 'https://placehold.co/144x144?text=Order'}
-                                                                        alt={itemName}
-                                                                        className="h-full w-full object-cover"
-                                                                    />
-                                                                </div>
-
-                                                                <div className="min-w-0">
-                                                                    <div className="text-sm font-bold text-slate-900">{itemName}</div>
-                                                                    <div className="mt-1 text-xs text-slate-500">{itemBrand || 'N/A'}</div>
-                                                                    <div className="mt-1 text-xs text-slate-500">{itemCategory || 'N/A'}</div>
-                                                                    <div className="mt-2 flex flex-wrap gap-2 text-xs text-slate-600">
-                                                                        <span className="rounded-full bg-white px-2 py-1 shadow-sm ring-1 ring-slate-200">Số lượng: {quantity}</span>
-                                                                        <span className="rounded-full bg-white px-2 py-1 shadow-sm ring-1 ring-slate-200">Đơn giá: {formatCurrency(itemPrice)}</span>
-                                                                        <span className="rounded-full bg-red-50 px-2 py-1 font-semibold text-red-600">Tạm tính: {formatCurrency(quantity * itemPrice)}</span>
-                                                                    </div>
-                                                                </div>
-
-                                                                <div className="text-right text-sm font-semibold text-slate-900">
-                                                                    <div className="text-xs font-normal text-slate-500">Snapshot</div>
-                                                                    <div>{snapshot.name || '---'}</div>
-                                                                </div>
-                                                            </div>
-                                                        );
-                                                    })}
-                                                </div>
-                                            ) : (
-                                                <Empty description="Đơn hàng này chưa có item nào." />
-                                            ),
-                                        },
-                                    ]}
-                                />
+                                <div className="mt-4 grid gap-4 md:grid-cols-[88px_1fr]">
+                                    <div className="h-22 w-22 overflow-hidden rounded-2xl bg-slate-50 ring-1 ring-slate-200">
+                                        <img
+                                            src={firstItem.image || 'https://placehold.co/176x176?text=Order'}
+                                            alt={firstItem.name || 'Sản phẩm'}
+                                            className="h-full w-full object-cover"
+                                        />
+                                    </div>
+                                    <div className="min-w-0">
+                                        <div className="text-sm font-semibold text-slate-900">{firstItem.name || 'Snapshot sản phẩm'}</div>
+                                        <div className="mt-1 text-sm text-slate-500">{items.length ? `+ ${items.length - 1} sản phẩm khác` : 'Không có item'}</div>
+                                        <div className="mt-2 text-xs text-slate-400">Snapshot giữ nguyên tên, ảnh và giá tại thời điểm checkout.</div>
+                                    </div>
+                                </div>
 
                                 <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white px-4 py-3 shadow-sm ring-1 ring-slate-200">
                                     <div className="text-sm text-slate-500">Tổng tiền đơn hàng</div>
@@ -179,16 +179,23 @@ const OrdersPage = () => {
                                 </div>
 
                                 <div className="mt-4 flex flex-wrap items-center gap-3">
-                                    <Button type="primary" onClick={() => navigate(`/orders/success/${order._id}`)}>
+                                    <Button type="primary" onClick={() => navigate(`/orders/${order._id}`)}>
                                         Xem chi tiết
-                                    </Button>
-                                    <Button onClick={() => navigate('/checkout')}>
-                                        Mua tiếp
                                     </Button>
                                 </div>
                             </Card>
                         );
                     })}
+
+                    <div className="flex justify-center pt-2">
+                        <Pagination
+                            current={page}
+                            pageSize={limit}
+                            total={total}
+                            showSizeChanger={false}
+                            onChange={(nextPage) => setPage(nextPage)}
+                        />
+                    </div>
                 </div>
             ) : (
                 <Card className="rounded-[28px] border-dashed border-slate-300 shadow-sm" bodyStyle={{ padding: 32 }}>
