@@ -52,7 +52,7 @@ const clearCart = async (req, res) => {
 };
 
 const checkoutCart = async (req, res) => {
-    const payload = await checkoutCartService(req.user.email);
+    const payload = await checkoutCartService(req.user.email, req.body?.shippingInfo, req.body?.paymentMethod);
     return sendMutationResponse(res, payload, 'Đặt hàng thành công');
 };
 

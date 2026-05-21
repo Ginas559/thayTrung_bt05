@@ -85,10 +85,14 @@ const addCartItemApi = (productId, qty = 1) => axios.post('/v1/api/cart/items', 
 const updateCartItemApi = (productId, qty) => axios.patch(`/v1/api/cart/items/${productId}`, { qty });
 const removeCartItemApi = (productId) => axios.delete(`/v1/api/cart/items/${productId}`);
 const clearCartApi = () => axios.delete('/v1/api/cart');
-const checkoutCartApi = () => axios.post('/v1/api/cart/checkout', {});
-const getMyOrdersApi = () => axios.get('/v1/api/orders/me');
+const getCheckoutPreviewApi = () => axios.get('/v1/api/orders/checkout/preview');
+const checkoutOrderApi = (payload) => axios.post('/v1/api/orders/checkout', payload);
+const checkoutCartApi = (payload = {}) => axios.post('/v1/api/orders/checkout', payload);
+const getMyOrdersApi = () => axios.get('/v1/api/orders/my-orders');
+const getOrderDetailApi = (id) => axios.get(`/v1/api/orders/${id}`);
 
-const getAdminOrdersApi = () => axios.get('/v1/api/admin/orders');
+const getAdminOrdersApi = () => axios.get('/v1/api/orders');
+const updateOrderStatusApi = (id, orderStatus) => axios.patch(`/v1/api/orders/${id}/status`, { orderStatus });
 const createKeyboardApi = (data) => axios.post('/v1/api/admin/keyboards', data);
 const updateKeyboardApi = (id, data) => axios.put(`/v1/api/admin/keyboards/${id}`, data);
 const deleteKeyboardApi = (id) => axios.delete(`/v1/api/admin/keyboards/${id}`);
@@ -119,9 +123,13 @@ export {
     updateCartItemApi,
     removeCartItemApi,
     clearCartApi,
+    getCheckoutPreviewApi,
+    checkoutOrderApi,
     checkoutCartApi,
     getMyOrdersApi,
+    getOrderDetailApi,
     getAdminOrdersApi,
+    updateOrderStatusApi,
     createKeyboardApi,
     updateKeyboardApi,
     deleteKeyboardApi,

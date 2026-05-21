@@ -1,10 +1,18 @@
 import { useContext, useEffect, useMemo, useState } from 'react';
 import { Navigate, useNavigate } from 'react-router-dom';
-import { Alert, Button, Card, Collapse, Divider, Empty, Spin, Tag, notification } from 'antd';
+import { Button, Card, Collapse, Divider, Empty, Spin, Tag, notification } from 'antd';
 import { ArrowLeftOutlined, ClockCircleOutlined, LoadingOutlined, ShoppingOutlined } from '@ant-design/icons';
 import { AuthContext } from '../components/context/auth.context';
 import { getMyOrdersApi } from '../util/api';
 import { formatCurrency } from '../util/format';
+
+const statusColorMap = {
+    PENDING: 'gold',
+    PROCESSING: 'blue',
+    SHIPPING: 'cyan',
+    DELIVERED: 'green',
+    CANCELLED: 'red',
+};
 
 const OrdersPage = () => {
     const navigate = useNavigate();
@@ -17,8 +25,8 @@ const OrdersPage = () => {
     const loadOrders = async () => {
         setLoading(true);
         try {
-            const res = await getMyOrdersApi();
-            setOrders(Array.isArray(res) ? res : []);
+            const response = await getMyOrdersApi();
+            setOrders(Array.isArray(response) ? response : []);
         } catch (error) {
             setOrders([]);
             notification.error({
@@ -64,7 +72,7 @@ const OrdersPage = () => {
                         Quay lại trang chủ
                     </Button>
                     <h1 className="mt-3 text-3xl font-black tracking-tight text-slate-900">Đơn hàng của tôi</h1>
-                    <p className="mt-2 text-slate-500">Xem lại các đơn đã đặt, từng item trong đơn, snapshot sản phẩm, số lượng và tổng tiền.</p>
+                    <p className="mt-2 text-slate-500">Mỗi đơn lưu snapshot sản phẩm nên lịch sử giao dịch vẫn đúng ngay cả khi product realtime thay đổi.</p>
                 </div>
 
                 <Tag color="red" icon={<ShoppingOutlined />}>{orderCount} đơn hàng</Tag>
@@ -89,9 +97,24 @@ const OrdersPage = () => {
                                     </div>
 
                                     <div className="flex flex-wrap items-center gap-2">
-                                        <Tag color="blue">{order.status || 'Pending'}</Tag>
+                                        <Tag color={statusColorMap[order.orderStatus] || 'blue'}>{order.orderStatus || 'PENDING'}</Tag>
                                         <Tag color="gold">{order.paymentMethod || 'COD'}</Tag>
-                                        <Tag color="red" icon={<ClockCircleOutlined />}>{formatCurrency(order.totalAmount || 0)}</Tag>
+                                        <Tag color={order.paymentStatus === 'PAID' ? 'green' : 'gold'} icon={<ClockCircleOutlined />}>{formatCurrency(order.totalAmount || 0)}</Tag>
+                                    </div>
+                                </div>
+
+                                <div className="mt-4 grid gap-4 md:grid-cols-3">
+                                    <div className="rounded-2xl bg-slate-50 p-4">
+                                        <div className="text-xs uppercase tracking-[0.22em] text-slate-400">Người nhận</div>
+                                        <div className="mt-2 font-semibold text-slate-900">{order.shippingInfo?.fullName || '---'}</div>
+                                    </div>
+                                    <div className="rounded-2xl bg-slate-50 p-4">
+                                        <div className="text-xs uppercase tracking-[0.22em] text-slate-400">Số điện thoại</div>
+                                        <div className="mt-2 font-semibold text-slate-900">{order.shippingInfo?.phone || '---'}</div>
+                                    </div>
+                                    <div className="rounded-2xl bg-slate-50 p-4">
+                                        <div className="text-xs uppercase tracking-[0.22em] text-slate-400">Phí ship</div>
+                                        <div className="mt-2 font-semibold text-slate-900">{formatCurrency(order.shippingFee || 0)}</div>
                                     </div>
                                 </div>
 
@@ -108,13 +131,14 @@ const OrdersPage = () => {
                                                 <div className="space-y-3">
                                                     {items.map((item, index) => {
                                                         const snapshot = item.snapshot || {};
-                                                        const itemName = snapshot.name || item.title || 'Sản phẩm';
+                                                        const itemName = snapshot.name || 'Sản phẩm';
                                                         const itemBrand = snapshot.brand || '';
-                                                        const itemPrice = Number(snapshot.price || item.price || 0);
-                                                        const quantity = Number(item.qty || 0);
+                                                        const itemCategory = snapshot.category || '';
+                                                        const itemPrice = Number(snapshot.price || 0);
+                                                        const quantity = Number(item.quantity || 0);
 
                                                         return (
-                                                            <div key={`${order._id}-${item.bookId || index}`} className="grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 md:grid-cols-[72px_1fr_auto] md:items-center">
+                                                            <div key={`${order._id}-${item.product || index}`} className="grid gap-3 rounded-2xl border border-slate-200 bg-slate-50 p-4 md:grid-cols-[72px_1fr_auto] md:items-center">
                                                                 <div className="h-18 w-18 overflow-hidden rounded-2xl bg-white">
                                                                     <img
                                                                         src={snapshot.image || 'https://placehold.co/144x144?text=Order'}
@@ -126,6 +150,7 @@ const OrdersPage = () => {
                                                                 <div className="min-w-0">
                                                                     <div className="text-sm font-bold text-slate-900">{itemName}</div>
                                                                     <div className="mt-1 text-xs text-slate-500">{itemBrand || 'N/A'}</div>
+                                                                    <div className="mt-1 text-xs text-slate-500">{itemCategory || 'N/A'}</div>
                                                                     <div className="mt-2 flex flex-wrap gap-2 text-xs text-slate-600">
                                                                         <span className="rounded-full bg-white px-2 py-1 shadow-sm ring-1 ring-slate-200">Số lượng: {quantity}</span>
                                                                         <span className="rounded-full bg-white px-2 py-1 shadow-sm ring-1 ring-slate-200">Đơn giá: {formatCurrency(itemPrice)}</span>
@@ -135,7 +160,7 @@ const OrdersPage = () => {
 
                                                                 <div className="text-right text-sm font-semibold text-slate-900">
                                                                     <div className="text-xs font-normal text-slate-500">Snapshot</div>
-                                                                    <div>{snapshot.name || item.title || '---'}</div>
+                                                                    <div>{snapshot.name || '---'}</div>
                                                                 </div>
                                                             </div>
                                                         );
@@ -151,6 +176,15 @@ const OrdersPage = () => {
                                 <div className="mt-4 flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white px-4 py-3 shadow-sm ring-1 ring-slate-200">
                                     <div className="text-sm text-slate-500">Tổng tiền đơn hàng</div>
                                     <div className="text-lg font-black text-red-600">{formatCurrency(order.totalAmount || 0)}</div>
+                                </div>
+
+                                <div className="mt-4 flex flex-wrap items-center gap-3">
+                                    <Button type="primary" onClick={() => navigate(`/orders/success/${order._id}`)}>
+                                        Xem chi tiết
+                                    </Button>
+                                    <Button onClick={() => navigate('/checkout')}>
+                                        Mua tiếp
+                                    </Button>
                                 </div>
                             </Card>
                         );

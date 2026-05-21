@@ -1,4 +1,4 @@
-const mongoose = require('mongoose');
+module.exports = require('./order.model');const mongoose = require('mongoose');
 
 const orderItemSchema = new mongoose.Schema({
     bookId: {

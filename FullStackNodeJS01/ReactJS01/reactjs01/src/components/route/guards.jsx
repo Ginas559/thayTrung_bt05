@@ -16,4 +16,18 @@ const RequireAdmin = ({ children }) => {
     return children;
 };
 
-export { RequireAdmin };
+const RequireAdminOrStaff = ({ children }) => {
+    const { auth } = useContext(AuthContext);
+
+    if (!auth?.isAuthenticated) {
+        return <Navigate to="/login" replace />;
+    }
+
+    if (!['Admin', 'Moderator'].includes(auth?.user?.role)) {
+        return <Navigate to="/" replace />;
+    }
+
+    return children;
+};
+
+export { RequireAdmin, RequireAdminOrStaff };

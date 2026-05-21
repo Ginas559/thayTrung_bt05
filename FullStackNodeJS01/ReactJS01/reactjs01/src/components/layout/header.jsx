@@ -27,6 +27,7 @@ const Header = () => {
     };
 
     const isAdmin = auth?.user?.role === "Admin";
+    const isManager = ['Admin', 'Moderator'].includes(auth?.user?.role);
     const onSubmitSearch = (event) => {
         event.preventDefault();
         if (searchValue.trim()) {
@@ -72,6 +73,11 @@ const Header = () => {
                                         <span>Đơn hàng</span>
                                     </Link>
                                 </>
+                            ) : isManager ? (
+                                <Link className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50" to="/admin/orders">
+                                    <ShoppingCartOutlined />
+                                    <span>Đơn hàng</span>
+                                </Link>
                             ) : (
                                 <>
                                     <Link className="inline-flex items-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-semibold text-red-700" to="/cart">

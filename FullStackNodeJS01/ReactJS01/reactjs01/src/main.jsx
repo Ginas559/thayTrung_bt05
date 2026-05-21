@@ -16,8 +16,11 @@ import NewsPage from './pages/news.jsx';
 import NewsDetailPage from './pages/news-detail.jsx';
 import CartPage from './pages/cart.jsx';
 import OrdersPage from './pages/orders.jsx';
+import CheckoutPage from './pages/checkout.jsx';
+import OrderSuccessPage from './pages/order-success.jsx';
+import AdminOrdersPage from './pages/admin-orders.jsx';
 import { AuthWrapper } from './components/context/auth.wrapper.jsx';
-import { RequireAdmin } from './components/route/guards.jsx';
+import { RequireAdmin, RequireAdminOrStaff } from './components/route/guards.jsx';
 import './styles/global.css';
 
 const router = createBrowserRouter([
@@ -35,7 +38,7 @@ const router = createBrowserRouter([
       },
       {
         path: "admin/orders",
-        element: <RequireAdmin><UserPage /></RequireAdmin>,
+        element: <RequireAdminOrStaff><AdminOrdersPage /></RequireAdminOrStaff>,
       },
       {
         path: "search",
@@ -58,8 +61,16 @@ const router = createBrowserRouter([
         element: <CartPage />,
       },
       {
+        path: "checkout",
+        element: <CheckoutPage />,
+      },
+      {
         path: "orders",
         element: <OrdersPage />,
+      },
+      {
+        path: "orders/success/:id",
+        element: <OrderSuccessPage />,
       },
     ],
   },

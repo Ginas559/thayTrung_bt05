@@ -11,7 +11,7 @@ import {
     ShoppingCartOutlined,
 } from '@ant-design/icons';
 import { AuthContext } from '../components/context/auth.context';
-import { checkoutCartApi, clearCartApi, getCartApi, removeCartItemApi, updateCartItemApi } from '../util/api';
+import { clearCartApi, getCartApi, removeCartItemApi, updateCartItemApi } from '../util/api';
 import { formatCurrency } from '../util/format';
 
 const emptyCartState = (user = '') => ({
@@ -49,7 +49,6 @@ const CartPage = () => {
     const { auth, appLoading } = useContext(AuthContext);
     const [cart, setCart] = useState(emptyCartState());
     const [loading, setLoading] = useState(true);
-    const [checkoutLoading, setCheckoutLoading] = useState(false);
     const [clearingLoading, setClearingLoading] = useState(false);
     const [pendingIds, setPendingIds] = useState({});
     const cartSnapshotRef = useRef(emptyCartState());
@@ -262,31 +261,6 @@ const CartPage = () => {
         });
     };
 
-    const onCheckout = async () => {
-        setCheckoutLoading(true);
-        try {
-            const res = await checkoutCartApi();
-
-            if (res?.EC !== 0) {
-                throw new Error(res?.EM || 'Không thể thanh toán');
-            }
-
-            notification.success({
-                message: 'Thanh toán',
-                description: res?.EM || 'Đặt hàng thành công',
-            });
-
-            await loadCart();
-        } catch (error) {
-            notification.error({
-                message: 'Thanh toán',
-                description: error?.message || 'Không thể thanh toán',
-            });
-        } finally {
-            setCheckoutLoading(false);
-        }
-    };
-
     const lowStockCount = useMemo(() => {
         return cartItems.filter((item) => Number(item.stock || 0) > 0 && Number(item.quantity || 0) >= Number(item.stock || 0) - 2).length;
     }, [cartItems]);
@@ -479,11 +453,10 @@ const CartPage = () => {
                                 type="primary"
                                 size="large"
                                 block
-                                loading={checkoutLoading}
                                 disabled={!cartItems.length}
-                                onClick={onCheckout}
+                                onClick={() => navigate('/checkout')}
                             >
-                                Thanh toán
+                                Đi tới thanh toán
                             </Button>
                             <Button
                                 danger

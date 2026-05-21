@@ -20,7 +20,8 @@ const {
     deleteArticle,
 } = require('../controllers/articleController');
 const cartRoutes = require('./cart.route');
-const { getMyOrders, getAllOrders } = require('../controllers/cartController');
+const orderRoutes = require('./order.route');
+const { getAllOrders } = require('../controllers/order.controller');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const delay = require('../middleware/delay');
@@ -53,7 +54,7 @@ routerAPI.get("/articles", getArticles);
 routerAPI.get("/articles/:id", getArticleDetail);
 
 routerAPI.use('/cart', cartRoutes);
-routerAPI.get("/orders/me", getMyOrders);
+routerAPI.use('/orders', orderRoutes);
 
 routerAPI.get("/admin/orders", admin, getAllOrders);
 routerAPI.post("/admin/keyboards", admin, createKeyboard);

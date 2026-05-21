@@ -1,7 +1,7 @@
 const mongoose = require('mongoose');
 const Cart = require('../models/cart.model');
 const Keyboard = require('../models/keyboard');
-const Order = require('../models/order');
+const orderService = require('./order.service');
 
 const normalizeUserKey = (userEmail) => String(userEmail || '').trim();
 
@@ -314,85 +314,13 @@ const clearCartService = async (userEmail) => {
     };
 };
 
-const checkoutCartService = async (userEmail) => {
-    const user = normalizeUserKey(userEmail);
-    const cartDoc = await findCartByUser(user);
-
-    if (!cartDoc || !Array.isArray(cartDoc.items) || !cartDoc.items.length) {
-        return { EC: 1, EM: 'Giỏ hàng trống' };
-    }
-
-    await normalizeCartForSave(cartDoc);
-    const cartPayload = await normalizeCartResponse(cartDoc.toObject(), user);
-
-    if (!cartPayload.items.length) {
-        return { EC: 1, EM: 'Giỏ hàng trống' };
-    }
-
-    const productIds = cartPayload.items.map((item) => item.product);
-    const productMap = await fetchProductsByIds(productIds);
-
-    for (const item of cartPayload.items) {
-        const product = productMap.get(item.product);
-
-        if (!product) {
-            return { EC: 1, EM: 'Sản phẩm không còn khả dụng' };
-        }
-
-        if (Number(product.stock || 0) < item.quantity) {
-            return { EC: 1, EM: `Sản phẩm ${item.snapshot.name || item.product} không đủ tồn kho` };
-        }
-    }
-
-    const orderItems = cartPayload.items.map((item) => ({
-        bookId: item.product,
-        title: item.snapshot.name,
-        qty: item.quantity,
-        price: item.snapshot.price,
-        snapshot: {
-            name: item.snapshot.name,
-            image: item.snapshot.image,
-            price: item.snapshot.price,
-            brand: item.snapshot.brand,
-        },
-    }));
-
-    const totalAmount = cartPayload.subtotal;
-
-    for (const item of cartPayload.items) {
-        await Keyboard.findByIdAndUpdate(item.product, {
-            $inc: {
-                stock: -item.quantity,
-                sold: item.quantity,
-            },
-        });
-    }
-
-    const order = await Order.create({
-        userEmail: user,
-        items: orderItems,
-        totalAmount,
-        status: 'Pending',
-        paymentMethod: 'COD',
-    });
-
-    cartDoc.items = [];
-    await cartDoc.save();
-
-    return {
-        EC: 0,
-        EM: 'Đặt hàng thành công',
-        DT: order,
-    };
+const checkoutCartService = async (userEmail, shippingInfo = {}, paymentMethod = 'COD') => {
+    return orderService.checkoutOrderService(userEmail, shippingInfo, paymentMethod);
 };
 
-const getMyOrdersService = async (userEmail) => {
-    return Order.find({ userEmail: normalizeUserKey(userEmail) }).sort({ createdAt: -1 });
-};
+const getMyOrdersService = async (userEmail) => orderService.getMyOrdersService(userEmail);
 
-const getAllOrdersService = async () => {
-    return Order.find({}).sort({ createdAt: -1 });
-};
+const getAllOrdersService = async () => orderService.getAllOrdersService();
 
 module.exports = {
     getCartService,
