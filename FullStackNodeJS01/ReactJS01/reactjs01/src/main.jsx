@@ -15,6 +15,7 @@ import KeyboardDetailPage from './pages/keyboard-detail.jsx';
 import NewsPage from './pages/news.jsx';
 import NewsDetailPage from './pages/news-detail.jsx';
 import CartPage from './pages/cart.jsx';
+import OrdersPage from './pages/orders.jsx';
 import { AuthWrapper } from './components/context/auth.wrapper.jsx';
 import { RequireAdmin } from './components/route/guards.jsx';
 import './styles/global.css';
@@ -30,6 +31,10 @@ const router = createBrowserRouter([
       },
       {
         path: "admin",
+        element: <RequireAdmin><UserPage /></RequireAdmin>,
+      },
+      {
+        path: "admin/orders",
         element: <RequireAdmin><UserPage /></RequireAdmin>,
       },
       {
@@ -51,6 +56,10 @@ const router = createBrowserRouter([
       {
         path: "cart",
         element: <CartPage />,
+      },
+      {
+        path: "orders",
+        element: <OrdersPage />,
       },
     ],
   },

@@ -1,5 +1,5 @@
 import { useContext, useState } from 'react';
-import { ShoppingCartOutlined, LogoutOutlined, SearchOutlined, CrownOutlined } from '@ant-design/icons';
+import { ShoppingCartOutlined, LogoutOutlined, SearchOutlined, CrownOutlined, ProfileOutlined } from '@ant-design/icons';
 import { Link, useLocation, useNavigate } from 'react-router-dom';
 import { AuthContext } from '../context/auth.context';
 import { clearAuthSession, createEmptyAuthState, getRefreshToken } from '../../util/auth.storage';
@@ -61,10 +61,29 @@ const Header = () => {
                 <div className="ml-auto flex flex-wrap items-center gap-3">
                     {auth.isAuthenticated ? (
                         <>
-                            <Link className="inline-flex items-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-semibold text-red-700" to={isAdmin ? '/admin' : '/cart'}>
-                                {isAdmin ? <CrownOutlined /> : <ShoppingCartOutlined />}
-                                <span>{isAdmin ? 'Quản trị' : 'Giỏ hàng'}</span>
-                            </Link>
+                            {isAdmin ? (
+                                <>
+                                    <Link className="inline-flex items-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-semibold text-red-700" to="/admin">
+                                        <CrownOutlined />
+                                        <span>Quản trị</span>
+                                    </Link>
+                                    <Link className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50" to="/admin/orders">
+                                        <ShoppingCartOutlined />
+                                        <span>Đơn hàng</span>
+                                    </Link>
+                                </>
+                            ) : (
+                                <>
+                                    <Link className="inline-flex items-center gap-2 rounded-2xl border border-red-200 bg-red-50 px-4 py-2 text-sm font-semibold text-red-700" to="/cart">
+                                        <ShoppingCartOutlined />
+                                        <span>Giỏ hàng</span>
+                                    </Link>
+                                    <Link className="inline-flex items-center gap-2 rounded-2xl border border-slate-200 bg-white px-4 py-2 text-sm font-semibold text-slate-700 transition hover:bg-slate-50" to="/orders">
+                                        <ProfileOutlined />
+                                        <span>Đơn đã đặt</span>
+                                    </Link>
+                                </>
+                            )}
                             <div className="flex items-center gap-3 border-l border-slate-200 pl-3">
                                 <div className="grid h-10 w-10 place-items-center rounded-full bg-red-100 font-bold text-red-700">{auth?.user?.name?.charAt(0) || 'U'}</div>
                                 <div>

@@ -19,15 +19,8 @@ const {
     updateArticle,
     deleteArticle,
 } = require('../controllers/articleController');
-const {
-    getCart,
-    addCartItem,
-    updateCartItem,
-    removeCartItem,
-    checkoutCart,
-    getMyOrders,
-    getAllOrders,
-} = require('../controllers/cartController');
+const cartRoutes = require('./cart.route');
+const { getMyOrders, getAllOrders } = require('../controllers/cartController');
 const auth = require('../middleware/auth');
 const admin = require('../middleware/admin');
 const delay = require('../middleware/delay');
@@ -59,11 +52,7 @@ routerAPI.get("/books/:id", getKeyboardDetail);
 routerAPI.get("/articles", getArticles);
 routerAPI.get("/articles/:id", getArticleDetail);
 
-routerAPI.get("/cart", getCart);
-routerAPI.post("/cart/items", addCartItem);
-routerAPI.patch("/cart/items/:bookId", updateCartItem);
-routerAPI.delete("/cart/items/:bookId", removeCartItem);
-routerAPI.post("/cart/checkout", checkoutCart);
+routerAPI.use('/cart', cartRoutes);
 routerAPI.get("/orders/me", getMyOrders);
 
 routerAPI.get("/admin/orders", admin, getAllOrders);

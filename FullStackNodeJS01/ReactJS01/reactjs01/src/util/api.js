@@ -81,9 +81,10 @@ const getArticleDetailApi = (id, params = {}) => {
 };
 
 const getCartApi = () => axios.get('/v1/api/cart');
-const addCartItemApi = (bookId, qty = 1) => axios.post('/v1/api/cart/items', { bookId, qty });
-const updateCartItemApi = (bookId, qty) => axios.patch(`/v1/api/cart/items/${bookId}`, { qty });
-const removeCartItemApi = (bookId) => axios.delete(`/v1/api/cart/items/${bookId}`);
+const addCartItemApi = (productId, qty = 1) => axios.post('/v1/api/cart/items', { productId, qty });
+const updateCartItemApi = (productId, qty) => axios.patch(`/v1/api/cart/items/${productId}`, { qty });
+const removeCartItemApi = (productId) => axios.delete(`/v1/api/cart/items/${productId}`);
+const clearCartApi = () => axios.delete('/v1/api/cart');
 const checkoutCartApi = () => axios.post('/v1/api/cart/checkout', {});
 const getMyOrdersApi = () => axios.get('/v1/api/orders/me');
 
@@ -117,6 +118,7 @@ export {
     addCartItemApi,
     updateCartItemApi,
     removeCartItemApi,
+    clearCartApi,
     checkoutCartApi,
     getMyOrdersApi,
     getAdminOrdersApi,

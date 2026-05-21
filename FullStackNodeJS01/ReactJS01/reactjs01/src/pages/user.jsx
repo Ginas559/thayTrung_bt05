@@ -1,4 +1,5 @@
 import { useEffect, useMemo, useState } from 'react';
+import { useLocation, useNavigate } from 'react-router-dom';
 import {
     createArticleApi,
     createKeyboardApi,
@@ -37,6 +38,8 @@ const emptyArticle = {
 };
 
 const AdminPage = () => {
+    const location = useLocation();
+    const navigate = useNavigate();
     const [activeTab, setActiveTab] = useState('books');
     const [keyboards, setKeyboards] = useState([]);
     const [articles, setArticles] = useState([]);
@@ -56,16 +59,21 @@ const AdminPage = () => {
     const [editingKeyboardId, setEditingKeyboardId] = useState('');
     const [editingArticleId, setEditingArticleId] = useState('');
     const [editingCategoryId, setEditingCategoryId] = useState('');
+    const [expandedOrderId, setExpandedOrderId] = useState('');
 
     const reloadData = async () => {
         const [keyboardsRes, articlesRes, categoriesRes, ordersRes, usersRes] = await Promise.all([
-            getKeyboardsApi({ q: keyboardQuery || undefined }),
+            // Request all keyboards for admin view by using a large limit
+            getKeyboardsApi({ q: keyboardQuery || undefined, page: 1, limit: 10000 }),
             getArticlesApi({ all: true }),
             getCategoriesApi(),
             getAdminOrdersApi(),
             getUserApi(),
         ]);
-        setKeyboards(Array.isArray(keyboardsRes) ? keyboardsRes : []);
+        const keyboardsArray = Array.isArray(keyboardsRes)
+            ? keyboardsRes
+            : (keyboardsRes && Array.isArray(keyboardsRes.items) ? keyboardsRes.items : []);
+        setKeyboards(keyboardsArray);
         setArticles(Array.isArray(articlesRes) ? articlesRes : []);
         setCategories(Array.isArray(categoriesRes) ? categoriesRes : []);
         setOrders(Array.isArray(ordersRes) ? ordersRes : []);
@@ -77,6 +85,17 @@ const AdminPage = () => {
         void reloadData();
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, []);
+
+    useEffect(() => {
+        if (location.pathname.includes('/admin/orders')) {
+            setActiveTab('orders');
+            return;
+        }
+
+        if (location.pathname === '/admin') {
+            setActiveTab((current) => current === 'orders' ? 'books' : current);
+        }
+    }, [location.pathname]);
 
     const filteredKeyboards = useMemo(() => keyboards.filter((keyboard) => `${keyboard.title} ${keyboard.author} ${keyboard.slug}`.toLowerCase().includes(keyboardQuery.toLowerCase())), [keyboards, keyboardQuery]);
     const filteredArticles = useMemo(() => articles.filter((article) => `${article.title} ${article.slug} ${article.category}`.toLowerCase().includes(articleQuery.toLowerCase())), [articles, articleQuery]);
@@ -256,7 +275,10 @@ const AdminPage = () => {
                     <button
                         key={tab.key}
                         type="button"
-                        onClick={() => setActiveTab(tab.key)}
+                        onClick={() => {
+                            setActiveTab(tab.key);
+                            navigate(tab.key === 'orders' ? '/admin/orders' : '/admin');
+                        }}
                         className={activeTab === tab.key ? 'rounded-xl bg-red-600 px-4 py-2 text-sm font-semibold text-white' : 'rounded-xl px-4 py-2 text-sm font-semibold text-slate-600 hover:bg-slate-100'}
                     >
                         {tab.label}
@@ -540,13 +562,85 @@ const AdminPage = () => {
                             </thead>
                             <tbody>
                                 {filteredOrders.map((order) => (
-                                    <tr key={order._id} className="border-t border-slate-200">
-                                        <td className="px-4 py-3">{order.userEmail}</td>
-                                        <td className="px-4 py-3">{order.status}</td>
-                                        <td className="px-4 py-3">{order.paymentMethod}</td>
-                                        <td className="px-4 py-3">{formatCurrency(order.totalAmount)}</td>
-                                        <td className="px-4 py-3 text-slate-500">{new Date(order.createdAt).toLocaleString('vi-VN')}</td>
-                                    </tr>
+                                    <>
+                                        <tr key={order._id} className="border-t border-slate-200 align-top">
+                                            <td className="px-4 py-3">
+                                                <div className="font-semibold text-slate-900">{order.userEmail}</div>
+                                                <div className="mt-1 text-xs text-slate-500">#{order._id}</div>
+                                            </td>
+                                            <td className="px-4 py-3">
+                                                <span className="rounded-full bg-slate-100 px-3 py-1 text-xs font-semibold text-slate-700">{order.status}</span>
+                                            </td>
+                                            <td className="px-4 py-3">{order.paymentMethod}</td>
+                                            <td className="px-4 py-3 font-semibold text-slate-900">{formatCurrency(order.totalAmount)}</td>
+                                            <td className="px-4 py-3 text-slate-500">{order.createdAt ? new Date(order.createdAt).toLocaleString('vi-VN') : ''}</td>
+                                        </tr>
+                                        <tr key={`${order._id}-detail`} className="border-t border-slate-100 bg-slate-50/60">
+                                            <td colSpan={5} className="px-4 py-4">
+                                                <div className="flex flex-wrap items-center justify-between gap-3">
+                                                    <div>
+                                                        <div className="text-sm font-semibold text-slate-900">Chi tiết đơn hàng</div>
+                                                        <div className="text-xs text-slate-500">{Array.isArray(order.items) ? order.items.length : 0} sản phẩm</div>
+                                                    </div>
+                                                    <button
+                                                        type="button"
+                                                        onClick={() => setExpandedOrderId((current) => (current === order._id ? '' : order._id))}
+                                                        className="rounded-xl bg-white px-3 py-2 text-xs font-semibold text-slate-700 shadow-sm ring-1 ring-slate-200"
+                                                    >
+                                                        {expandedOrderId === order._id ? 'Ẩn chi tiết' : 'Xem chi tiết'}
+                                                    </button>
+                                                </div>
+
+                                                {expandedOrderId === order._id ? (
+                                                    <div className="mt-4 grid gap-3">
+                                                        {Array.isArray(order.items) && order.items.length ? order.items.map((item, index) => {
+                                                            const snapshot = item.snapshot || {};
+                                                            const itemName = snapshot.name || item.title || 'Sản phẩm';
+                                                            const itemBrand = snapshot.brand || '';
+                                                            const itemPrice = Number(snapshot.price || item.price || 0);
+                                                            const quantity = Number(item.qty || 0);
+
+                                                            return (
+                                                                <div key={`${order._id}-${item.bookId || index}`} className="grid gap-3 rounded-2xl border border-slate-200 bg-white p-4 md:grid-cols-[72px_1fr_auto] md:items-center">
+                                                                    <div className="h-18 w-18 overflow-hidden rounded-2xl bg-slate-100">
+                                                                        <img
+                                                                            src={snapshot.image || 'https://placehold.co/144x144?text=Order'}
+                                                                            alt={itemName}
+                                                                            className="h-full w-full object-cover"
+                                                                        />
+                                                                    </div>
+
+                                                                    <div className="min-w-0">
+                                                                        <div className="text-sm font-bold text-slate-900">{itemName}</div>
+                                                                        <div className="mt-1 text-xs text-slate-500">{itemBrand || 'N/A'}</div>
+                                                                        <div className="mt-2 flex flex-wrap gap-2 text-xs text-slate-600">
+                                                                            <span className="rounded-full bg-slate-100 px-2 py-1">Số lượng: {quantity}</span>
+                                                                            <span className="rounded-full bg-slate-100 px-2 py-1">Đơn giá: {formatCurrency(itemPrice)}</span>
+                                                                            <span className="rounded-full bg-red-50 px-2 py-1 font-semibold text-red-600">Tạm tính: {formatCurrency(quantity * itemPrice)}</span>
+                                                                        </div>
+                                                                    </div>
+
+                                                                    <div className="text-right text-sm font-semibold text-slate-900">
+                                                                        <div className="text-xs font-normal text-slate-500">Snapshot</div>
+                                                                        <div>{snapshot.name || item.title || '---'}</div>
+                                                                    </div>
+                                                                </div>
+                                                            );
+                                                        }) : (
+                                                            <div className="rounded-2xl border border-dashed border-slate-300 bg-white p-4 text-sm text-slate-500">
+                                                                Đơn hàng này chưa có dữ liệu chi tiết.
+                                                            </div>
+                                                        )}
+
+                                                        <div className="flex flex-wrap items-center justify-between gap-3 rounded-2xl bg-white px-4 py-3 shadow-sm ring-1 ring-slate-200">
+                                                            <div className="text-sm text-slate-500">Tổng tiền đơn hàng</div>
+                                                            <div className="text-lg font-black text-red-600">{formatCurrency(order.totalAmount)}</div>
+                                                        </div>
+                                                    </div>
+                                                ) : null}
+                                            </td>
+                                        </tr>
+                                    </>
                                 ))}
                             </tbody>
                         </table>

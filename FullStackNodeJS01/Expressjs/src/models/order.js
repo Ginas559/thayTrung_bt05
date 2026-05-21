@@ -8,6 +8,24 @@ const orderItemSchema = new mongoose.Schema({
     title: String,
     qty: Number,
     price: Number,
+    snapshot: {
+        name: {
+            type: String,
+            default: '',
+        },
+        image: {
+            type: String,
+            default: '',
+        },
+        price: {
+            type: Number,
+            default: 0,
+        },
+        brand: {
+            type: String,
+            default: '',
+        },
+    },
 });
 
 const orderSchema = new mongoose.Schema({
