@@ -104,7 +104,7 @@ const normalizeCartResponse = async (cartDoc, user) => {
     const subtotal = items.reduce((sum, item) => sum + item.subtotal, 0);
 
     return {
-        user: cartDoc.user || user,
+        user: cartDoc.user || cartDoc.userEmail || user,
         items,
         totalItems: items.length,
         totalQuantity,
@@ -122,14 +122,44 @@ const normalizeCartForSave = async (cartDoc) => {
     return { cartDoc, productMap };
 };
 
-const findCartByUser = (userEmail) => Cart.findOne({ user: normalizeUserKey(userEmail) });
+const findCartByUser = (userEmail) => {
+    const user = normalizeUserKey(userEmail);
+    return Cart.findOne({
+        $or: [
+            { user },
+            { userEmail: user },
+        ],
+    });
+};
+
+const ensureCartUserFields = async (cartDoc, user) => {
+    if (!cartDoc || !user) {
+        return cartDoc;
+    }
+
+    let changed = false;
+
+    if (cartDoc.user !== user) {
+        cartDoc.user = user;
+        changed = true;
+    }
+
+    if (cartDoc.userEmail !== user) {
+        cartDoc.userEmail = user;
+        changed = true;
+    }
+
+    return changed ? cartDoc.save() : cartDoc;
+};
 
 const getOrCreateCartDoc = async (userEmail) => {
     const user = normalizeUserKey(userEmail);
     let cartDoc = await findCartByUser(user);
 
     if (!cartDoc) {
-        cartDoc = await Cart.create({ user, items: [] });
+        cartDoc = await Cart.create({ user, userEmail: user, items: [] });
+    } else {
+        cartDoc = await ensureCartUserFields(cartDoc, user);
     }
 
     return cartDoc;
@@ -220,12 +250,13 @@ const updateCartItemService = async (userEmail, productId, qty) => {
     }
 
     const user = normalizeUserKey(userEmail);
-    const cartDoc = await findCartByUser(user);
+    let cartDoc = await findCartByUser(user);
 
     if (!cartDoc) {
         return { EC: 1, EM: 'Giỏ hàng không tồn tại' };
     }
 
+    cartDoc = await ensureCartUserFields(cartDoc, user);
     await normalizeCartForSave(cartDoc);
 
     const item = cartDoc.items.find((entry) => String(entry.product) === String(productId));
@@ -266,12 +297,13 @@ const removeCartItemService = async (userEmail, productId) => {
     }
 
     const user = normalizeUserKey(userEmail);
-    const cartDoc = await findCartByUser(user);
+    let cartDoc = await findCartByUser(user);
 
     if (!cartDoc) {
         return { EC: 1, EM: 'Giỏ hàng không tồn tại' };
     }
 
+    cartDoc = await ensureCartUserFields(cartDoc, user);
     await normalizeCartForSave(cartDoc);
 
     const beforeCount = cartDoc.items.length;
@@ -294,7 +326,7 @@ const removeCartItemService = async (userEmail, productId) => {
 
 const clearCartService = async (userEmail) => {
     const user = normalizeUserKey(userEmail);
-    const cartDoc = await findCartByUser(user);
+    let cartDoc = await findCartByUser(user);
 
     if (!cartDoc) {
         return {
@@ -304,6 +336,7 @@ const clearCartService = async (userEmail) => {
         };
     }
 
+    cartDoc = await ensureCartUserFields(cartDoc, user);
     cartDoc.items = [];
     await cartDoc.save();
 

@@ -64,7 +64,37 @@ const resolveUserByEmail = async (email) => {
     return User.findOne({ email: normalizedEmail }).select('_id email name role').lean();
 };
 
-const findCartByUser = (userEmail) => Cart.findOne({ user: normalizeText(userEmail) });
+const findCartByUser = (userEmail) => {
+    const user = normalizeText(userEmail);
+    return Cart.findOne({
+        $or: [
+            { user },
+            { userEmail: user },
+        ],
+    });
+};
+
+const ensureCartUserFields = async (cartDoc, userEmail) => {
+    const user = normalizeText(userEmail);
+
+    if (!cartDoc || !user) {
+        return cartDoc;
+    }
+
+    let changed = false;
+
+    if (cartDoc.user !== user) {
+        cartDoc.user = user;
+        changed = true;
+    }
+
+    if (cartDoc.userEmail !== user) {
+        cartDoc.userEmail = user;
+        changed = true;
+    }
+
+    return changed ? cartDoc.save() : cartDoc;
+};
 
 const fetchProductsByIds = async (productIds) => {
     if (!Array.isArray(productIds) || !productIds.length) {
@@ -88,12 +118,13 @@ const buildOrderSnapshot = (product) => ({
 });
 
 const buildResolvedCartItems = async (userEmail) => {
-    const cartDoc = await findCartByUser(userEmail);
+    let cartDoc = await findCartByUser(userEmail);
 
     if (!cartDoc || !Array.isArray(cartDoc.items) || !cartDoc.items.length) {
         return { cartDoc: null, resolvedItems: [], summary: emptyOrderSummary() };
     }
 
+    cartDoc = await ensureCartUserFields(cartDoc, userEmail);
     const rawItems = cartDoc.items;
     const productIds = [...new Set(rawItems.map(getRawProductId).filter(Boolean))];
     const productMap = await fetchProductsByIds(productIds);

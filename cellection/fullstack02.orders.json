@@ -1,0 +1,630 @@
+[{
+  "_id": {
+    "$oid": "6a0a5fb712d170cc53c4cf88"
+  },
+  "userEmail": "levanphong511@gmail.com",
+  "items": [
+    {
+      "bookId": {
+        "$oid": "6a09cca9abc14eb32547f3ea"
+      },
+      "title": "Phoenix Pro Leopold",
+      "qty": 5,
+      "price": 2200000,
+      "_id": {
+        "$oid": "6a0a5fb712d170cc53c4cf89"
+      }
+    }
+  ],
+  "totalAmount": 11000000,
+  "status": "Pending",
+  "paymentMethod": "COD",
+  "createdAt": {
+    "$date": "2026-05-18T00:39:19.585Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-18T00:39:19.585Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a0f235c9373f7592b1694ec"
+  },
+  "userEmail": "nguyencongphuongttbp@gmail.com",
+  "items": [
+    {
+      "bookId": {
+        "$oid": "6a09cca9abc14eb32547f3f5"
+      },
+      "title": "Galaxy M1 NuPhy",
+      "qty": 3,
+      "price": 3300000,
+      "_id": {
+        "$oid": "6a0f235c9373f7592b1694ed"
+      }
+    }
+  ],
+  "totalAmount": 9900000,
+  "status": "Pending",
+  "paymentMethod": "COD",
+  "createdAt": {
+    "$date": "2026-05-21T15:23:08.963Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-21T15:23:08.963Z"
+  },
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a0f336019ad0426cf5862bd"
+  },
+  "user": {
+    "$oid": "6a09ccd8abc14eb32547f3fb"
+  },
+  "items": [
+    {
+      "product": {
+        "$oid": "6a09cca9abc14eb32547f3f5"
+      },
+      "quantity": 1,
+      "snapshot": {
+        "name": "Galaxy M1 NuPhy",
+        "image": "https://th.bing.com/th/id/OIP.Y6UEgzvvIWgwNGl6a22LCAHaEK?w=259&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+        "price": 3300000,
+        "brand": "NuPhy",
+        "category": "Work & Office"
+      }
+    },
+    {
+      "product": {
+        "$oid": "6a09cca9abc14eb32547f3ed"
+      },
+      "quantity": 2,
+      "snapshot": {
+        "name": "Cinder 80 NuPhy",
+        "image": "https://th.bing.com/th/id/OIP.4eKMWHmMOY6RbgLLXL6KywHaHa?w=224&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+        "price": 2500000,
+        "brand": "NuPhy",
+        "category": "Wireless"
+      }
+    },
+    {
+      "product": {
+        "$oid": "6a09cca9abc14eb32547f3f4"
+      },
+      "quantity": 1,
+      "snapshot": {
+        "name": "Horizon Mini Logitech",
+        "image": "https://th.bing.com/th/id/OIP.WgL-aDtk28RQZlGiKHYONQHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+        "price": 3200000,
+        "brand": "Logitech",
+        "category": "Gaming"
+      }
+    }
+  ],
+  "shippingInfo": {
+    "fullName": "Nguyen Cong Phuong",
+    "phone": "0848188622",
+    "address": "rhr\nrhr",
+    "note": ""
+  },
+  "paymentMethod": "COD",
+  "paymentStatus": "UNPAID",
+  "orderStatus": "DELIVERED",
+  "subtotal": 11500000,
+  "shippingFee": 30000,
+  "totalAmount": 11530000,
+  "createdAt": {
+    "$date": "2026-05-21T16:31:28.232Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-21T17:21:57.021Z"
+  },
+  "__v": 4,
+  "cancelReason": "",
+  "confirmedAt": {
+    "$date": "2026-05-21T17:16:05.410Z"
+  },
+  "statusHistory": [
+    {
+      "status": "CONFIRMED",
+      "updatedBy": null,
+      "updatedAt": {
+        "$date": "2026-05-21T17:16:05.410Z"
+      },
+      "note": "Tự động xác nhận sau 30 phút"
+    },
+    {
+      "status": "PREPARING",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:21:37.120Z"
+      },
+      "note": "Cập nhật trạng thái sang PREPARING"
+    },
+    {
+      "status": "SHIPPING",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:21:38.961Z"
+      },
+      "note": "Cập nhật trạng thái sang SHIPPING"
+    },
+    {
+      "status": "DELIVERED",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:21:57.018Z"
+      },
+      "note": "Cập nhật trạng thái sang DELIVERED"
+    }
+  ],
+  "preparingAt": {
+    "$date": "2026-05-21T17:21:37.120Z"
+  },
+  "shippingAt": {
+    "$date": "2026-05-21T17:21:38.961Z"
+  },
+  "deliveredAt": {
+    "$date": "2026-05-21T17:21:57.018Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a0f339119ad0426cf5862be"
+  },
+  "user": {
+    "$oid": "6a09ccd8abc14eb32547f3fb"
+  },
+  "items": [
+    {
+      "product": {
+        "$oid": "6a09cca9abc14eb32547f3ec"
+      },
+      "quantity": 8,
+      "snapshot": {
+        "name": "Argon Wireless Logitech",
+        "image": "https://th.bing.com/th/id/OIP.u27ubnHjMr_CAI3N5eRjEAAAAA?w=303&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+        "price": 2400000,
+        "brand": "Logitech",
+        "category": "Custom"
+      }
+    }
+  ],
+  "shippingInfo": {
+    "fullName": "Nguyen Cong Phuong",
+    "phone": "0848188622",
+    "address": "rhr\nrhr",
+    "note": ""
+  },
+  "paymentMethod": "COD",
+  "paymentStatus": "UNPAID",
+  "orderStatus": "DELIVERED",
+  "subtotal": 19200000,
+  "shippingFee": 30000,
+  "totalAmount": 19230000,
+  "createdAt": {
+    "$date": "2026-05-21T16:32:17.479Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-21T17:18:41.243Z"
+  },
+  "__v": 4,
+  "cancelReason": "",
+  "confirmedAt": {
+    "$date": "2026-05-21T17:16:05.366Z"
+  },
+  "statusHistory": [
+    {
+      "status": "CONFIRMED",
+      "updatedBy": null,
+      "updatedAt": {
+        "$date": "2026-05-21T17:16:05.366Z"
+      },
+      "note": "Tự động xác nhận sau 30 phút"
+    },
+    {
+      "status": "PREPARING",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:17:13.694Z"
+      },
+      "note": "Cập nhật trạng thái sang PREPARING"
+    },
+    {
+      "status": "SHIPPING",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:18:13.675Z"
+      },
+      "note": "Cập nhật trạng thái sang SHIPPING"
+    },
+    {
+      "status": "DELIVERED",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:18:41.242Z"
+      },
+      "note": "Cập nhật trạng thái sang DELIVERED"
+    }
+  ],
+  "preparingAt": {
+    "$date": "2026-05-21T17:17:13.694Z"
+  },
+  "shippingAt": {
+    "$date": "2026-05-21T17:18:13.675Z"
+  },
+  "deliveredAt": {
+    "$date": "2026-05-21T17:18:41.242Z"
+  }
+},
+{
+  "_id": {
+    "$oid": "6a0f3eb72e1bc30edbf122b1"
+  },
+  "user": {
+    "$oid": "6a09ccd8abc14eb32547f3fb"
+  },
+  "items": [
+    {
+      "product": {
+        "$oid": "6a09cca9abc14eb32547f3f1"
+      },
+      "quantity": 2,
+      "snapshot": {
+        "name": "Obsidian 96 Akko",
+        "image": "https://th.bing.com/th/id/OIP.u27ubnHjMr_CAI3N5eRjEAAAAA?w=303&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+        "price": 2900000,
+        "brand": "Akko",
+        "category": "Custom"
+      }
+    }
+  ],
+  "shippingInfo": {
+    "fullName": "Nguyen Cong Phuong",
+    "phone": "0848188622",
+    "address": "rhr\nrhr",
+    "note": ""
+  },
+  "paymentMethod": "COD",
+  "paymentStatus": "UNPAID",
+  "orderStatus": "CANCELLED",
+  "statusHistory": [
+    {
+      "status": "PENDING",
+      "updatedBy": {
+        "$oid": "6a09ccd8abc14eb32547f3fb"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:19:51.841Z"
+      },
+      "note": "Đơn hàng được tạo"
+    },
+    {
+      "status": "CANCELLED",
+      "updatedBy": {
+        "$oid": "6a09ccd8abc14eb32547f3fb"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:20:10.815Z"
+      },
+      "note": "User cancelled order before shipping"
+    }
+  ],
+  "subtotal": 5800000,
+  "shippingFee": 30000,
+  "totalAmount": 5830000,
+  "confirmedAt": null,
+  "preparingAt": null,
+  "shippingAt": null,
+  "deliveredAt": null,
+  "cancelledAt": {
+    "$date": "2026-05-21T17:20:10.815Z"
+  },
+  "cancelReason": "User cancelled order before shipping",
+  "createdAt": {
+    "$date": "2026-05-21T17:19:51.843Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-21T17:20:10.816Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "6a0f3edb2e1bc30edbf122b2"
+  },
+  "user": {
+    "$oid": "6a09ccd8abc14eb32547f3fb"
+  },
+  "items": [
+    {
+      "product": {
+        "$oid": "6a09cca9abc14eb32547f3e7"
+      },
+      "quantity": 1,
+      "snapshot": {
+        "name": "Nebula 65 Corsair",
+        "image": "https://th.bing.com/th/id/OIP.IkiOjuzfMVum_U2KjpEyJAHaEK?w=282&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+        "price": 1900000,
+        "brand": "Corsair",
+        "category": "Custom"
+      }
+    }
+  ],
+  "shippingInfo": {
+    "fullName": "Nguyen Cong Phuong",
+    "phone": "0848188622",
+    "address": "rhr\nrhr",
+    "note": ""
+  },
+  "paymentMethod": "COD",
+  "paymentStatus": "UNPAID",
+  "orderStatus": "CANCELLED",
+  "statusHistory": [
+    {
+      "status": "PENDING",
+      "updatedBy": {
+        "$oid": "6a09ccd8abc14eb32547f3fb"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:20:27.736Z"
+      },
+      "note": "Đơn hàng được tạo"
+    },
+    {
+      "status": "CONFIRMED",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:20:35.741Z"
+      },
+      "note": "Cập nhật trạng thái sang CONFIRMED"
+    },
+    {
+      "status": "PREPARING",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:20:47.435Z"
+      },
+      "note": "Cập nhật trạng thái sang PREPARING"
+    },
+    {
+      "status": "CANCEL_REQUESTED",
+      "updatedBy": {
+        "$oid": "6a09ccd8abc14eb32547f3fb"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:21:00.892Z"
+      },
+      "note": "User requested cancel while preparing"
+    },
+    {
+      "status": "CANCELLED",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:21:14.957Z"
+      },
+      "note": "Admin duyệt yêu cầu hủy đơn"
+    }
+  ],
+  "subtotal": 1900000,
+  "shippingFee": 30000,
+  "totalAmount": 1930000,
+  "confirmedAt": {
+    "$date": "2026-05-21T17:20:35.741Z"
+  },
+  "preparingAt": {
+    "$date": "2026-05-21T17:20:47.435Z"
+  },
+  "shippingAt": null,
+  "deliveredAt": null,
+  "cancelledAt": {
+    "$date": "2026-05-21T17:21:14.957Z"
+  },
+  "cancelReason": "Admin duyệt yêu cầu hủy đơn",
+  "createdAt": {
+    "$date": "2026-05-21T17:20:27.737Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-21T17:21:14.959Z"
+  },
+  "__v": 4
+},
+{
+  "_id": {
+    "$oid": "6a0f3f4f2e1bc30edbf122b3"
+  },
+  "user": {
+    "$oid": "6a09ccd8abc14eb32547f3fb"
+  },
+  "items": [
+    {
+      "product": {
+        "$oid": "6a09cca9abc14eb32547f3f0"
+      },
+      "quantity": 1,
+      "snapshot": {
+        "name": "Lumen65 Keychron",
+        "image": "https://th.bing.com/th/id/OIP.U81mdyIXsim7eSmiO6Na7AHaDq?w=326&h=172&c=7&r=0&o=7&pid=1.7&rm=3",
+        "price": 2800000,
+        "brand": "Keychron",
+        "category": "Work & Office"
+      }
+    }
+  ],
+  "shippingInfo": {
+    "fullName": "Nguyen Cong Phuong",
+    "phone": "0848188622",
+    "address": "rhr\nrhr",
+    "note": ""
+  },
+  "paymentMethod": "COD",
+  "paymentStatus": "UNPAID",
+  "orderStatus": "CANCELLED",
+  "statusHistory": [
+    {
+      "status": "PENDING",
+      "updatedBy": {
+        "$oid": "6a09ccd8abc14eb32547f3fb"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:22:23.905Z"
+      },
+      "note": "Đơn hàng được tạo"
+    },
+    {
+      "status": "CANCELLED",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:22:31.436Z"
+      },
+      "note": "Cập nhật trạng thái sang CANCELLED"
+    }
+  ],
+  "subtotal": 2800000,
+  "shippingFee": 30000,
+  "totalAmount": 2830000,
+  "confirmedAt": null,
+  "preparingAt": null,
+  "shippingAt": null,
+  "deliveredAt": null,
+  "cancelledAt": {
+    "$date": "2026-05-21T17:22:31.436Z"
+  },
+  "cancelReason": "",
+  "createdAt": {
+    "$date": "2026-05-21T17:22:23.907Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-21T17:22:31.438Z"
+  },
+  "__v": 1
+},
+{
+  "_id": {
+    "$oid": "6a0f3f682e1bc30edbf122b4"
+  },
+  "user": {
+    "$oid": "6a09ccd8abc14eb32547f3fb"
+  },
+  "items": [
+    {
+      "product": {
+        "$oid": "6a09cca9abc14eb32547f3e9"
+      },
+      "quantity": 1,
+      "snapshot": {
+        "name": "Vortex 60 Akko",
+        "image": "https://th.bing.com/th/id/OIP.qY6FGVFD1SJJIFkFpk754gHaEK?w=304&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+        "price": 2100000,
+        "brand": "Akko",
+        "category": "Low Profile"
+      }
+    }
+  ],
+  "shippingInfo": {
+    "fullName": "Nguyen Cong Phuong",
+    "phone": "0848188622",
+    "address": "rhr\nrhr",
+    "note": ""
+  },
+  "paymentMethod": "COD",
+  "paymentStatus": "UNPAID",
+  "orderStatus": "CANCELLED",
+  "statusHistory": [
+    {
+      "status": "PENDING",
+      "updatedBy": {
+        "$oid": "6a09ccd8abc14eb32547f3fb"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:22:48.634Z"
+      },
+      "note": "Đơn hàng được tạo"
+    },
+    {
+      "status": "CONFIRMED",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:22:53.385Z"
+      },
+      "note": "Cập nhật trạng thái sang CONFIRMED"
+    },
+    {
+      "status": "PREPARING",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:22:55.596Z"
+      },
+      "note": "Cập nhật trạng thái sang PREPARING"
+    },
+    {
+      "status": "CANCEL_REQUESTED",
+      "updatedBy": {
+        "$oid": "6a09ccd8abc14eb32547f3fb"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:23:06.138Z"
+      },
+      "note": "User requested cancel while preparing"
+    },
+    {
+      "status": "CANCELLED",
+      "updatedBy": {
+        "$oid": "6a09cca9abc14eb32547f3df"
+      },
+      "updatedAt": {
+        "$date": "2026-05-21T17:23:32.811Z"
+      },
+      "note": "Cập nhật trạng thái sang CANCELLED"
+    }
+  ],
+  "subtotal": 2100000,
+  "shippingFee": 30000,
+  "totalAmount": 2130000,
+  "confirmedAt": {
+    "$date": "2026-05-21T17:22:53.385Z"
+  },
+  "preparingAt": {
+    "$date": "2026-05-21T17:22:55.596Z"
+  },
+  "shippingAt": null,
+  "deliveredAt": null,
+  "cancelledAt": {
+    "$date": "2026-05-21T17:23:32.811Z"
+  },
+  "cancelReason": "User requested cancel while preparing",
+  "createdAt": {
+    "$date": "2026-05-21T17:22:48.635Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-21T17:23:32.812Z"
+  },
+  "__v": 4
+}]

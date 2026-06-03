@@ -1,0 +1,53 @@
+[{
+  "_id": {
+    "$oid": "6a0a5fb412d170cc53c4cf80"
+  },
+  "userEmail": "levanphong511@gmail.com",
+  "items": [],
+  "createdAt": {
+    "$date": "2026-05-18T00:39:16.860Z"
+  },
+  "updatedAt": {
+    "$date": "2026-05-18T00:39:19.653Z"
+  },
+  "__v": 2
+},
+{
+  "_id": {
+    "$oid": "6a0f23469373f7592b1694eb"
+  },
+  "user": "nguyencongphuongttbp@gmail.com",
+  "items": [
+    {
+      "product": {
+        "$oid": "6a09cca9abc14eb32547f3e9"
+      },
+      "quantity": 4,
+      "snapshot": {
+        "name": "Vortex 60 Akko",
+        "image": "https://th.bing.com/th/id/OIP.qY6FGVFD1SJJIFkFpk754gHaEK?w=304&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+        "price": 2100000,
+        "brand": "Akko"
+      }
+    },
+    {
+      "product": {
+        "$oid": "6a09cca9abc14eb32547f3e9"
+      },
+      "quantity": 1,
+      "snapshot": {
+        "name": "Vortex 60 Akko",
+        "image": "https://th.bing.com/th/id/OIP.qY6FGVFD1SJJIFkFpk754gHaEK?w=304&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+        "price": 2100000,
+        "brand": "Akko"
+      }
+    }
+  ],
+  "createdAt": {
+    "$date": "2026-05-21T15:22:46.635Z"
+  },
+  "updatedAt": {
+    "$date": "2026-06-03T06:43:20.686Z"
+  },
+  "__v": 35
+}]

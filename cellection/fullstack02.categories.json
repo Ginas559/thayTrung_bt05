@@ -1,0 +1,45 @@
+[{
+  "_id": {
+    "$oid": "6a09cca9629112efe58aa9e8"
+  },
+  "slug": "gaming",
+  "__v": 0,
+  "description": "Bàn phím cơ cho game thủ, phản hồi nhanh và độ bền cao.",
+  "name": "Gaming"
+},
+{
+  "_id": {
+    "$oid": "6a09cca9629112efe58aa9e9"
+  },
+  "slug": "custom",
+  "__v": 0,
+  "description": "Phụ kiện, switch và keycap để build theo phong cách riêng.",
+  "name": "Custom"
+},
+{
+  "_id": {
+    "$oid": "6a09cca9629112efe58aa9e7"
+  },
+  "slug": "wireless",
+  "__v": 0,
+  "description": "Bàn phím không dây, linh hoạt cho nhiều thiết bị.",
+  "name": "Wireless"
+},
+{
+  "_id": {
+    "$oid": "6a09cca9629112efe58aa9ea"
+  },
+  "slug": "work-office",
+  "__v": 0,
+  "description": "Bàn phím gọn, êm, tối ưu cho làm việc lâu dài.",
+  "name": "Work & Office"
+},
+{
+  "_id": {
+    "$oid": "6a09cca9629112efe58aa9eb"
+  },
+  "slug": "low-profile",
+  "__v": 0,
+  "description": "Thiết kế mỏng, gõ nhanh và tiết kiệm không gian.",
+  "name": "Low Profile"
+}]

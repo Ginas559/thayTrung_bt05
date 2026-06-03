@@ -1,0 +1,825 @@
+[{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3e0"
+  },
+  "title": "Kinetic Nova Keychron",
+  "slug": "kinetic-nova",
+  "author": "Keychron",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e8"
+  },
+  "description": "Bàn phím Kinetic Nova của Keychron - thiết kế tối ưu cho gaming.",
+  "price": 1200000,
+  "oldPrice": 1344000,
+  "discount": 16,
+  "stock": 5,
+  "sold": 10,
+  "rating": 4.7,
+  "reviewCount": 50,
+  "images": [
+    "https://th.bing.com/th/id/OIP.LIlql2u8hKJXXUSiZeuuOwHaD_?w=306&h=181&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.e13DLdAq8X32uOaspFIADAHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.IkiOjuzfMVum_U2KjpEyJAHaEK?w=282&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "gaming"
+  ],
+  "isFeatured": true,
+  "isNewest": true,
+  "isBestSeller": true,
+  "isPromotion": true,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3e1"
+  },
+  "title": "Aurora Pro Akko",
+  "slug": "aurora-pro",
+  "author": "Akko",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9ea"
+  },
+  "description": "Bàn phím Aurora Pro của Akko - thiết kế tối ưu cho work-office.",
+  "price": 1300000,
+  "oldPrice": 1456000,
+  "discount": 9,
+  "stock": 8,
+  "sold": 17,
+  "rating": 4.8,
+  "reviewCount": 70,
+  "images": [
+    "https://th.bing.com/th/id/OIP.U81mdyIXsim7eSmiO6Na7AHaDq?w=326&h=172&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.uigcS4TEjbEPFI58nrRE0gHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.QrlXQ5TuKgT9Ry2IpP0zzgHaHU?w=175&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "work-office"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3e2"
+  },
+  "title": "Titan V2 Leopold",
+  "slug": "titan-v2",
+  "author": "Leopold",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e9"
+  },
+  "description": "Bàn phím Titan V2 của Leopold - thiết kế tối ưu cho custom.",
+  "price": 1400000,
+  "oldPrice": 1568000,
+  "discount": 9,
+  "stock": 11,
+  "sold": 24,
+  "rating": 4.1,
+  "reviewCount": 90,
+  "images": [
+    "https://th.bing.com/th/id/OIP.u27ubnHjMr_CAI3N5eRjEAAAAA?w=303&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.WgL-aDtk28RQZlGiKHYONQHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.qY6FGVFD1SJJIFkFpk754gHaEK?w=304&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "custom"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3e3"
+  },
+  "title": "Mercury TKL Razer",
+  "slug": "mercury-tkl",
+  "author": "Razer",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e7"
+  },
+  "description": "Bàn phím Mercury TKL của Razer - thiết kế tối ưu cho wireless.",
+  "price": 1500000,
+  "oldPrice": 1680000,
+  "discount": 16,
+  "stock": 14,
+  "sold": 31,
+  "rating": 4.1,
+  "reviewCount": 110,
+  "images": [
+    "https://th.bing.com/th/id/OIP.e13DLdAq8X32uOaspFIADAHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.Y6UEgzvvIWgwNGl6a22LCAHaEK?w=259&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.oHoSLPsXpk1YaasTMde_vAHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "wireless"
+  ],
+  "isFeatured": false,
+  "isNewest": true,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3e4"
+  },
+  "title": "Zephyr 75 Logitech",
+  "slug": "zephyr-75",
+  "author": "Logitech",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9eb"
+  },
+  "description": "Bàn phím Zephyr 75 của Logitech - thiết kế tối ưu cho low-profile.",
+  "price": 1600000,
+  "oldPrice": 1792000,
+  "discount": 7,
+  "stock": 17,
+  "sold": 38,
+  "rating": 4.2,
+  "reviewCount": 130,
+  "images": [
+    "https://th.bing.com/th/id/OIP.uigcS4TEjbEPFI58nrRE0gHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.IkiOjuzfMVum_U2KjpEyJAHaEK?w=282&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.0g_jZ4BFUtcQLCc8sEb_7AHaHd?w=177&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "low-profile"
+  ],
+  "isFeatured": true,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3e5"
+  },
+  "title": "Orbit Mini NuPhy",
+  "slug": "orbit-mini",
+  "author": "NuPhy",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e8"
+  },
+  "description": "Bàn phím Orbit Mini của NuPhy - thiết kế tối ưu cho gaming.",
+  "price": 1700000,
+  "oldPrice": 1904000,
+  "discount": 12,
+  "stock": 20,
+  "sold": 45,
+  "rating": 4.2,
+  "reviewCount": 150,
+  "images": [
+    "https://th.bing.com/th/id/OIP.WgL-aDtk28RQZlGiKHYONQHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.QrlXQ5TuKgT9Ry2IpP0zzgHaHU?w=175&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.u27ubnHjMr_CAI3N5eRjEAAAAA?w=303&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "gaming"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": true,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3e6"
+  },
+  "title": "Atlas Full MonsGeek",
+  "slug": "atlas-full",
+  "author": "MonsGeek",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9ea"
+  },
+  "description": "Bàn phím Atlas Full của MonsGeek - thiết kế tối ưu cho work-office.",
+  "price": 1800000,
+  "oldPrice": 2016000,
+  "discount": 7,
+  "stock": 23,
+  "sold": 52,
+  "rating": 5,
+  "reviewCount": 170,
+  "images": [
+    "https://th.bing.com/th/id/OIP.Y6UEgzvvIWgwNGl6a22LCAHaEK?w=259&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.qY6FGVFD1SJJIFkFpk754gHaEK?w=304&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.4eKMWHmMOY6RbgLLXL6KywHaHa?w=224&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "work-office"
+  ],
+  "isFeatured": false,
+  "isNewest": true,
+  "isBestSeller": false,
+  "isPromotion": true,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3e7"
+  },
+  "title": "Nebula 65 Corsair",
+  "slug": "nebula-65",
+  "author": "Corsair",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e9"
+  },
+  "description": "Bàn phím Nebula 65 của Corsair - thiết kế tối ưu cho custom.",
+  "price": 1900000,
+  "oldPrice": 2128000,
+  "discount": 17,
+  "stock": 26,
+  "sold": 59,
+  "rating": 4.8,
+  "reviewCount": 190,
+  "images": [
+    "https://th.bing.com/th/id/OIP.IkiOjuzfMVum_U2KjpEyJAHaEK?w=282&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.oHoSLPsXpk1YaasTMde_vAHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.zY2gyKPn6NvRIg1-hT8cdAHaEK?w=334&h=187&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "custom"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3e8"
+  },
+  "title": "Polaris RGB Keychron",
+  "slug": "polaris-rgb",
+  "author": "Keychron",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e7"
+  },
+  "description": "Bàn phím Polaris RGB của Keychron - thiết kế tối ưu cho wireless.",
+  "price": 2000000,
+  "oldPrice": 2240000,
+  "discount": 18,
+  "stock": 29,
+  "sold": 66,
+  "rating": 4.1,
+  "reviewCount": 210,
+  "images": [
+    "https://th.bing.com/th/id/OIP.QrlXQ5TuKgT9Ry2IpP0zzgHaHU?w=175&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.0g_jZ4BFUtcQLCc8sEb_7AHaHd?w=177&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.LIlql2u8hKJXXUSiZeuuOwHaD_?w=306&h=181&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "wireless"
+  ],
+  "isFeatured": true,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3e9"
+  },
+  "title": "Vortex 60 Akko",
+  "slug": "vortex-60",
+  "author": "Akko",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9eb"
+  },
+  "description": "Bàn phím Vortex 60 của Akko - thiết kế tối ưu cho low-profile.",
+  "price": 2100000,
+  "oldPrice": 2352000,
+  "discount": 10,
+  "stock": 32,
+  "sold": 73,
+  "rating": 4.4,
+  "reviewCount": 230,
+  "images": [
+    "https://th.bing.com/th/id/OIP.qY6FGVFD1SJJIFkFpk754gHaEK?w=304&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.u27ubnHjMr_CAI3N5eRjEAAAAA?w=303&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.U81mdyIXsim7eSmiO6Na7AHaDq?w=326&h=172&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "low-profile"
+  ],
+  "isFeatured": false,
+  "isNewest": true,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3ea"
+  },
+  "title": "Phoenix Pro Leopold",
+  "slug": "phoenix-pro",
+  "author": "Leopold",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e8"
+  },
+  "description": "Bàn phím Phoenix Pro của Leopold - thiết kế tối ưu cho gaming.",
+  "price": 2200000,
+  "oldPrice": 2464000,
+  "discount": 11,
+  "stock": 0,
+  "sold": 85,
+  "rating": 4,
+  "reviewCount": 250,
+  "images": [
+    "https://th.bing.com/th/id/OIP.oHoSLPsXpk1YaasTMde_vAHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.4eKMWHmMOY6RbgLLXL6KywHaHa?w=224&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.u27ubnHjMr_CAI3N5eRjEAAAAA?w=303&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "gaming"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": true,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3eb"
+  },
+  "title": "Comet Low Razer",
+  "slug": "comet-low",
+  "author": "Razer",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9ea"
+  },
+  "description": "Bàn phím Comet Low của Razer - thiết kế tối ưu cho work-office.",
+  "price": 2300000,
+  "oldPrice": 2576000,
+  "discount": 16,
+  "stock": 8,
+  "sold": 87,
+  "rating": 4.6,
+  "reviewCount": 270,
+  "images": [
+    "https://th.bing.com/th/id/OIP.0g_jZ4BFUtcQLCc8sEb_7AHaHd?w=177&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.zY2gyKPn6NvRIg1-hT8cdAHaEK?w=334&h=187&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.e13DLdAq8X32uOaspFIADAHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "work-office"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3ec"
+  },
+  "title": "Argon Wireless Logitech",
+  "slug": "argon-wireless",
+  "author": "Logitech",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e9"
+  },
+  "description": "Bàn phím Argon Wireless của Logitech - thiết kế tối ưu cho custom.",
+  "price": 2400000,
+  "oldPrice": 2688000,
+  "discount": 5,
+  "stock": 3,
+  "sold": 102,
+  "rating": 4.2,
+  "reviewCount": 290,
+  "images": [
+    "https://th.bing.com/th/id/OIP.u27ubnHjMr_CAI3N5eRjEAAAAA?w=303&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.LIlql2u8hKJXXUSiZeuuOwHaD_?w=306&h=181&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.uigcS4TEjbEPFI58nrRE0gHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "custom"
+  ],
+  "isFeatured": true,
+  "isNewest": true,
+  "isBestSeller": false,
+  "isPromotion": true,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3ed"
+  },
+  "title": "Cinder 80 NuPhy",
+  "slug": "cinder-80",
+  "author": "NuPhy",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e7"
+  },
+  "description": "Bàn phím Cinder 80 của NuPhy - thiết kế tối ưu cho wireless.",
+  "price": 2500000,
+  "oldPrice": 2800000,
+  "discount": 10,
+  "stock": 12,
+  "sold": 103,
+  "rating": 4.4,
+  "reviewCount": 310,
+  "images": [
+    "https://th.bing.com/th/id/OIP.4eKMWHmMOY6RbgLLXL6KywHaHa?w=224&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.U81mdyIXsim7eSmiO6Na7AHaDq?w=326&h=172&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.WgL-aDtk28RQZlGiKHYONQHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "wireless"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3ee"
+  },
+  "title": "Eclipse 68 MonsGeek",
+  "slug": "eclipse-68",
+  "author": "MonsGeek",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9eb"
+  },
+  "description": "Bàn phím Eclipse 68 của MonsGeek - thiết kế tối ưu cho low-profile.",
+  "price": 2600000,
+  "oldPrice": 2912000,
+  "discount": 18,
+  "stock": 17,
+  "sold": 108,
+  "rating": 4.3,
+  "reviewCount": 330,
+  "images": [
+    "https://th.bing.com/th/id/OIP.zY2gyKPn6NvRIg1-hT8cdAHaEK?w=334&h=187&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.u27ubnHjMr_CAI3N5eRjEAAAAA?w=303&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.Y6UEgzvvIWgwNGl6a22LCAHaEK?w=259&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "low-profile"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3ef"
+  },
+  "title": "Solaris Corsair",
+  "slug": "solaris",
+  "author": "Corsair",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e8"
+  },
+  "description": "Bàn phím Solaris của Corsair - thiết kế tối ưu cho gaming.",
+  "price": 2700000,
+  "oldPrice": 3024000,
+  "discount": 19,
+  "stock": 20,
+  "sold": 115,
+  "rating": 4.7,
+  "reviewCount": 350,
+  "images": [
+    "https://th.bing.com/th/id/OIP.LIlql2u8hKJXXUSiZeuuOwHaD_?w=306&h=181&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.e13DLdAq8X32uOaspFIADAHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.IkiOjuzfMVum_U2KjpEyJAHaEK?w=282&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "gaming"
+  ],
+  "isFeatured": false,
+  "isNewest": true,
+  "isBestSeller": true,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3f0"
+  },
+  "title": "Lumen65 Keychron",
+  "slug": "lumen65",
+  "author": "Keychron",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9ea"
+  },
+  "description": "Bàn phím Lumen65 của Keychron - thiết kế tối ưu cho work-office.",
+  "price": 2800000,
+  "oldPrice": 3136000,
+  "discount": 10,
+  "stock": 23,
+  "sold": 122,
+  "rating": 4.7,
+  "reviewCount": 370,
+  "images": [
+    "https://th.bing.com/th/id/OIP.U81mdyIXsim7eSmiO6Na7AHaDq?w=326&h=172&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.uigcS4TEjbEPFI58nrRE0gHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.QrlXQ5TuKgT9Ry2IpP0zzgHaHU?w=175&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "work-office"
+  ],
+  "isFeatured": true,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3f1"
+  },
+  "title": "Obsidian 96 Akko",
+  "slug": "obsidian-96",
+  "author": "Akko",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e9"
+  },
+  "description": "Bàn phím Obsidian 96 của Akko - thiết kế tối ưu cho custom.",
+  "price": 2900000,
+  "oldPrice": 3248000,
+  "discount": 17,
+  "stock": 26,
+  "sold": 129,
+  "rating": 4.9,
+  "reviewCount": 390,
+  "images": [
+    "https://th.bing.com/th/id/OIP.u27ubnHjMr_CAI3N5eRjEAAAAA?w=303&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.WgL-aDtk28RQZlGiKHYONQHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.qY6FGVFD1SJJIFkFpk754gHaEK?w=304&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "custom"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3f2"
+  },
+  "title": "Nimbus 75 Leopold",
+  "slug": "nimbus-75",
+  "author": "Leopold",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e7"
+  },
+  "description": "Bàn phím Nimbus 75 của Leopold - thiết kế tối ưu cho wireless.",
+  "price": 3000000,
+  "oldPrice": 3360000,
+  "discount": 15,
+  "stock": 29,
+  "sold": 136,
+  "rating": 4.2,
+  "reviewCount": 410,
+  "images": [
+    "https://th.bing.com/th/id/OIP.e13DLdAq8X32uOaspFIADAHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.Y6UEgzvvIWgwNGl6a22LCAHaEK?w=259&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.oHoSLPsXpk1YaasTMde_vAHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "wireless"
+  ],
+  "isFeatured": false,
+  "isNewest": true,
+  "isBestSeller": false,
+  "isPromotion": true,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3f3"
+  },
+  "title": "Sable TKL Razer",
+  "slug": "sable-tkl",
+  "author": "Razer",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9eb"
+  },
+  "description": "Bàn phím Sable TKL của Razer - thiết kế tối ưu cho low-profile.",
+  "price": 3100000,
+  "oldPrice": 3472000,
+  "discount": 9,
+  "stock": 32,
+  "sold": 143,
+  "rating": 4.2,
+  "reviewCount": 430,
+  "images": [
+    "https://th.bing.com/th/id/OIP.uigcS4TEjbEPFI58nrRE0gHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.IkiOjuzfMVum_U2KjpEyJAHaEK?w=282&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.0g_jZ4BFUtcQLCc8sEb_7AHaHd?w=177&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "low-profile"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3f4"
+  },
+  "title": "Horizon Mini Logitech",
+  "slug": "horizon-mini",
+  "author": "Logitech",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e8"
+  },
+  "description": "Bàn phím Horizon Mini của Logitech - thiết kế tối ưu cho gaming.",
+  "price": 3200000,
+  "oldPrice": 3584000,
+  "discount": 14,
+  "stock": 4,
+  "sold": 151,
+  "rating": 4.6,
+  "reviewCount": 450,
+  "images": [
+    "https://th.bing.com/th/id/OIP.WgL-aDtk28RQZlGiKHYONQHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.QrlXQ5TuKgT9Ry2IpP0zzgHaHU?w=175&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.u27ubnHjMr_CAI3N5eRjEAAAAA?w=303&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "gaming"
+  ],
+  "isFeatured": true,
+  "isNewest": false,
+  "isBestSeller": true,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3f5"
+  },
+  "title": "Galaxy M1 NuPhy",
+  "slug": "galaxy-m1",
+  "author": "NuPhy",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9ea"
+  },
+  "description": "Bàn phím Galaxy M1 của NuPhy - thiết kế tối ưu cho work-office.",
+  "price": 3300000,
+  "oldPrice": 3696000,
+  "discount": 18,
+  "stock": 4,
+  "sold": 161,
+  "rating": 4.9,
+  "reviewCount": 470,
+  "images": [
+    "https://th.bing.com/th/id/OIP.Y6UEgzvvIWgwNGl6a22LCAHaEK?w=259&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.qY6FGVFD1SJJIFkFpk754gHaEK?w=304&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.4eKMWHmMOY6RbgLLXL6KywHaHa?w=224&h=180&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "work-office"
+  ],
+  "isFeatured": false,
+  "isNewest": true,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3f6"
+  },
+  "title": "Echo Pro MonsGeek",
+  "slug": "echo-pro",
+  "author": "MonsGeek",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e9"
+  },
+  "description": "Bàn phím Echo Pro của MonsGeek - thiết kế tối ưu cho custom.",
+  "price": 3400000,
+  "oldPrice": 3808000,
+  "discount": 12,
+  "stock": 11,
+  "sold": 164,
+  "rating": 4.7,
+  "reviewCount": 490,
+  "images": [
+    "https://th.bing.com/th/id/OIP.IkiOjuzfMVum_U2KjpEyJAHaEK?w=282&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.oHoSLPsXpk1YaasTMde_vAHaHa?w=205&h=205&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.zY2gyKPn6NvRIg1-hT8cdAHaEK?w=334&h=187&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "custom"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3f7"
+  },
+  "title": "Pulse 75 Corsair",
+  "slug": "pulse-75",
+  "author": "Corsair",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e7"
+  },
+  "description": "Bàn phím Pulse 75 của Corsair - thiết kế tối ưu cho wireless.",
+  "price": 3500000,
+  "oldPrice": 3920000,
+  "discount": 12,
+  "stock": 14,
+  "sold": 171,
+  "rating": 4.4,
+  "reviewCount": 510,
+  "images": [
+    "https://th.bing.com/th/id/OIP.QrlXQ5TuKgT9Ry2IpP0zzgHaHU?w=175&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.0g_jZ4BFUtcQLCc8sEb_7AHaHd?w=177&h=180&c=7&r=0&o=7&pid=1.7&rm=3",
+    "https://th.bing.com/th/id/OIP.LIlql2u8hKJXXUSiZeuuOwHaD_?w=306&h=181&c=7&r=0&o=7&pid=1.7&rm=3"
+  ],
+  "tags": [
+    "wireless"
+  ],
+  "isFeatured": false,
+  "isNewest": false,
+  "isBestSeller": false,
+  "isPromotion": false,
+  "createdAtLabel": "2026-05-17",
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a0a70f410764fd74333022b"
+  },
+  "title": "title",
+  "slug": "slug",
+  "author": "author",
+  "categoryId": {
+    "$oid": "6a09cca9629112efe58aa9e9"
+  },
+  "description": "description",
+  "price": null,
+  "oldPrice": null,
+  "discount": null,
+  "stock": null,
+  "sold": null,
+  "rating": null,
+  "reviewCount": null,
+  "images": [
+    "https://product.hstatic.net/1000037809/product/01_db2f7ec481f84a61871dc05617dfac21_grande.png",
+    "https://product.hstatic.net/1000037809/product/02_a7ab3b009fc0472199490578e1e3384e_grande.png",
+    "https://product.hstatic.net/1000037809/product/03_fa4544f27608459ca908a306b1c5662d_grande.png",
+    "https://product.hstatic.net/1000037809/product/04_fe048fa50921470bb190a13d4e73c086_master.png",
+    "https://product.hstatic.net/1000037809/product/05_1c0d60f4c0ff4767b35a25fc9cccca20_grande.png",
+    "https://product.hstatic.net/1000037809/product/06_161cb591bb62450cb8f0bc8315dbde66_grande.png"
+  ],
+  "tags": [],
+  "isFeatured": true,
+  "isNewest": true,
+  "isBestSeller": true,
+  "isPromotion": true,
+  "__v": 0
+}]

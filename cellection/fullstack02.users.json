@@ -1,0 +1,140 @@
+[{
+  "_id": {
+    "$oid": "6a09cca9abc14eb32547f3df"
+  },
+  "name": "Admin Keyboard Store",
+  "email": "admindoaibiet@gmail.com",
+  "password": "$2b$10$WxuiRvo2W3CkzZFhJB.uROMGLOCk0syMaju13hmPqywK6UHe/cw.y",
+  "role": "Admin",
+  "isVerified": true,
+  "__v": 0,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImFkbWluZG9haWJpZXRAZ21haWwuY29tIiwibmFtZSI6IkFkbWluIEtleWJvYXJkIFN0b3JlIiwicm9sZSI6IkFkbWluIiwiaWF0IjoxNzgwNDY4ODMxLCJleHAiOjE3ODEwNzM2MzF9.0euygRY8hKRIR-y03_up04D-ABsc0QS_-4PybMZ0lNw"
+},
+{
+  "_id": {
+    "$oid": "6a09ccd8abc14eb32547f3fb"
+  },
+  "name": "Nguyen Cong Phuong",
+  "email": "nguyencongphuongttbp@gmail.com",
+  "password": "$2b$10$IVraKfnHRqZlvQrnq3uNrewC6gbFNG5C.cBA.kJoD.B6OWBAgEBU.",
+  "role": "User",
+  "isVerified": true,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6Im5ndXllbmNvbmdwaHVvbmd0dGJwQGdtYWlsLmNvbSIsIm5hbWUiOiJOZ3V5ZW4gQ29uZyBQaHVvbmciLCJyb2xlIjoiVXNlciIsImlhdCI6MTc4MDQ2ODkxMCwiZXhwIjoxNzgxMDczNzEwfQ.HSSUJvPIqfQHC0D1voG6uepDiRVj3djpEJLPU5p8V3A",
+  "registerOtp": null,
+  "registerOtpExpiresAt": null,
+  "resetOtp": null,
+  "resetOtpExpiresAt": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a09e4f4ce693bbb28527802"
+  },
+  "name": "le thanh thanh",
+  "email": "luubaitapso3@gmail.com",
+  "password": "$2b$10$B6lhhBBVTwHLEn2Kus4.AegR2nUa.yph0UikNG0ePdm6.P.5Go4ey",
+  "role": "User",
+  "isVerified": true,
+  "refreshToken": null,
+  "registerOtp": null,
+  "registerOtpExpiresAt": null,
+  "resetOtp": null,
+  "resetOtpExpiresAt": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a0a5f1a12d170cc53c4cf7f"
+  },
+  "name": "Nguyễn Văn Linh",
+  "email": "levanphong511@gmail.com",
+  "password": "$2b$10$BGWVVu5XFvD8VfNeXX7mculzPuI9LDqA1G2pWvhkkaG9d.pMzHuOm",
+  "role": "User",
+  "isVerified": true,
+  "refreshToken": null,
+  "registerOtp": null,
+  "registerOtpExpiresAt": null,
+  "resetOtp": null,
+  "resetOtpExpiresAt": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a0a6168a389226b2c7e79d3"
+  },
+  "name": "Niki Wolf",
+  "email": "qzs42978@laoia.com",
+  "password": "$2b$10$ePa8V7dqP.x5/0T2IxtgKukjmrHZn4G5fv.cMvR1fD78KGwqsGMmi",
+  "role": "User",
+  "isVerified": true,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InF6czQyOTc4QGxhb2lhLmNvbSIsIm5hbWUiOiJOaWtpIFdvbGYiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc3OTA2OTIwMSwiZXhwIjoxNzc5Njc0MDAxfQ.tzL7Iv6bIKG7-aPaPezA3ZHlnbJ9N9O3ytB5TFADllU",
+  "registerOtp": null,
+  "registerOtpExpiresAt": null,
+  "resetOtp": null,
+  "resetOtpExpiresAt": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a0a61b63bcf25487af01627"
+  },
+  "name": "Niki Wolf",
+  "email": "pea63541@laoia.com",
+  "password": "$2b$10$/roRpivL8G6u4eSOd8JpA.uRPf6OHBTK7YC22xWIVgbmkDufYvNQ6",
+  "role": "User",
+  "isVerified": true,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InBlYTYzNTQxQGxhb2lhLmNvbSIsIm5hbWUiOiJOaWtpIFdvbGYiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc3OTA2NTMwMiwiZXhwIjoxNzc5NjcwMTAyfQ._uzOjNLnp1xN2LcnEi5twhPW0dKvcKMCknreKxl9ypM",
+  "registerOtp": null,
+  "registerOtpExpiresAt": null,
+  "resetOtp": null,
+  "resetOtpExpiresAt": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a0aaba06b8239756b6e3b63"
+  },
+  "name": "Niki Wolf",
+  "email": "yca41340@laoia.com",
+  "password": "$2b$10$Ed4a9lQgzG/0puuHcxJqcuhs3tIb0amHjouXVcEfxky2lCD.4Zc7.",
+  "role": "User",
+  "isVerified": true,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6InljYTQxMzQwQGxhb2lhLmNvbSIsIm5hbWUiOiJOaWtpIFdvbGYiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc3OTA4NTIwNCwiZXhwIjoxNzc5NjkwMDA0fQ.bvXKz3qOA6FxCP_nS2SaJ91BR9FMTGHPx16Zhc5mfJQ",
+  "registerOtp": null,
+  "registerOtpExpiresAt": null,
+  "resetOtp": null,
+  "resetOtpExpiresAt": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a1fc80023ac766fdb245dd5"
+  },
+  "name": "le thanh thanh",
+  "email": "gkaqpcdwhoqbzcgubk@onldm.net",
+  "password": "$2b$10$JUDZYURzUwr29bSH9ix0uu3Zrkpo3ufeNnFOJg1xUsL7/8u065A.m",
+  "role": "User",
+  "isVerified": true,
+  "refreshToken": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJlbWFpbCI6ImdrYXFwY2R3aG9xYnpjZ3Via0BvbmxkbS5uZXQiLCJuYW1lIjoibGUgdGhhbmggdGhhbmgiLCJyb2xlIjoiVXNlciIsImlhdCI6MTc4MDQ2Nzg3MywiZXhwIjoxNzgxMDcyNjczfQ.Cya_P2FF22tzIxi5qvDIGVLEx2ajgMM6L9miJBbzKAc",
+  "registerOtp": null,
+  "registerOtpExpiresAt": null,
+  "resetOtp": null,
+  "resetOtpExpiresAt": null,
+  "__v": 0
+},
+{
+  "_id": {
+    "$oid": "6a1fcb30154e4c4a124982d1"
+  },
+  "name": "Nguyen Cong Phuong",
+  "email": "nnumgafkisimqdavxt@jbsze.ne",
+  "password": "$2b$10$4s7Axtop6/WLHhS5hQ7CzuCE9cC.CMUllNd7rKljTfCy7KpGBoWki",
+  "role": "User",
+  "isVerified": true,
+  "refreshToken": null,
+  "registerOtp": null,
+  "registerOtpExpiresAt": null,
+  "resetOtp": null,
+  "resetOtpExpiresAt": null,
+  "__v": 0
+}]

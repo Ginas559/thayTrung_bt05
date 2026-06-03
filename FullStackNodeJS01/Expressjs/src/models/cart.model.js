@@ -31,6 +31,10 @@ const cartSchema = new mongoose.Schema(
             index: true,
             trim: true,
         },
+        userEmail: {
+            type: String,
+            trim: true,
+        },
         items: {
             type: [cartItemSchema],
             default: [],
